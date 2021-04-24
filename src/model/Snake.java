@@ -1,7 +1,7 @@
 package model;
 
 public class Snake {
-    
+
     private Nodo firstS;
     private Nodo lastS;
     private char idS;

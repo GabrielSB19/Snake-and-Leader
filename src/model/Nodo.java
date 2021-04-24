@@ -1,11 +1,11 @@
 package model;
 
 public class Nodo {
-    
+
     private int row;
     private int col;
     private int num;
-    
+
     private Nodo next;
     private Nodo prev;
     private Nodo up;
@@ -72,10 +72,8 @@ public class Nodo {
     public void setNum(int num) {
         this.num = num;
     }
-    
-    
-    
+
     public String toString() {
-        return "["+num+"]";
+        return "[" + num + "]";
     }
 }

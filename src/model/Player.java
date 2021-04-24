@@ -1,12 +1,12 @@
 package model;
 
 public class Player {
-    
+
     private String symbol;
     private int amountPlay;
     private int position;
     private boolean finish;
-    
+
     private Player next;
     private Player left;
     private Player right;
