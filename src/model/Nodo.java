@@ -4,15 +4,18 @@ public class Nodo {
     
     private int row;
     private int col;
+    private int num;
+    private String players;
     
     private Nodo next;
     private Nodo prev;
     private Nodo up;
     private Nodo down;
 
-    public Nodo(int row, int col) {
+    public Nodo(int row, int col, int num) {
         this.row = row;
         this.col = col;
+        this.num = num;
     }
 
     public int getRow() {
@@ -61,5 +64,19 @@ public class Nodo {
 
     public void setDown(Nodo down) {
         this.down = down;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+    
+    
+    
+    public String toString() {
+        return "["+num+players+"]";
     }
 }

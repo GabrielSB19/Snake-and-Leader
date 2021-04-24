@@ -1,11 +1,13 @@
 package ui;
+import model.*; 
 
 import java.util.Scanner;
 
 public class MenuMain {
 
     private Scanner sc = new Scanner(System.in);
-    private MetodhMain mm;
+    private MetodhMain mm = new MetodhMain();
+    
     
     public static void welcome(){
         System.out.println("-----------------------------------");
@@ -29,7 +31,11 @@ public class MenuMain {
     public void doOperation (int choice){
         switch(choice){
             case 1:
-                System.out.println("Play");
+                System.out.println("Por favor ingresa los parametros del juego en una cadena");
+                int a = Integer.parseInt(sc.nextLine());
+                int b = Integer.parseInt(sc.nextLine());
+                Matrix mx = new Matrix(a, b);
+                System.out.println(mx.toString());
                 break;
             case 2:
                 System.out.println("Binary");

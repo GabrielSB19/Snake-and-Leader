@@ -16,7 +16,7 @@ public class Player {
         this.symbol = symbol;
         this.amountPlay = amountPlay;
         this.position = position;
-        this.finish = finish;
+        this.finish = false;
     }
 
     public String getSymbol() {
