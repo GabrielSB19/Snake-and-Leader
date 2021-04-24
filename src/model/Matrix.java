@@ -36,7 +36,7 @@ public class Matrix {
     }
     
     private void createRow(int i, int j, Nodo firstRow){
-        createCol(i, j+1, firstRow);
+        createCol(i, j+1, firstRow, firstRow.getUp());
         if (i+1 < numRow) {
             Nodo downFirstRow = new Nodo(i+1, j, num++);
             downFirstRow.setUp(firstRow);
@@ -45,12 +45,18 @@ public class Matrix {
         }
     }
 
-    private void createCol(int i, int j, Nodo prev) {
-        if(j < numCol){
+    private void createCol(int i, int j, Nodo prev, Nodo rowPrev) {
+        if (j < numCol) {
             Nodo current = new Nodo(i, j, num++);
             current.setPrev(prev);
             prev.setNext(current);
-            createCol(i, j+1, current);
+
+            if (rowPrev != null) {
+                rowPrev = rowPrev.getNext();
+                current.setUp(rowPrev);
+                rowPrev.setDown(current);
+            }
+            createCol(i, j + 1, current, rowPrev);
         }
     }
     

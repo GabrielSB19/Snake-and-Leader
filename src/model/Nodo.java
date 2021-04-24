@@ -5,7 +5,6 @@ public class Nodo {
     private int row;
     private int col;
     private int num;
-    private String players;
     
     private Nodo next;
     private Nodo prev;
@@ -77,6 +76,6 @@ public class Nodo {
     
     
     public String toString() {
-        return "["+num+players+"]";
+        return "["+num+"]";
     }
 }
