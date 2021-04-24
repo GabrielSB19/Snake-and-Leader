@@ -23,7 +23,7 @@ public class MethodMain {
 
     public void createSnakes() {
         int ammountSnake = Integer.parseInt(params[2]);
-        int maxNods = Integer.parseInt(params[0]) * Integer.parseInt(params[1]);
-        gm.createSnakes(row, col, ammountSnake, maxNods);
+        gm.createSnakes(row, col, ammountSnake);
+        gm.setCountSnakes(0);
     }
 }

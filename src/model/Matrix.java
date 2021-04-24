@@ -4,7 +4,7 @@ public class Matrix {
 
     private int numRow;
     private int numCol;
-
+    private int charOrderAscii = 65;
     private Nodo first;
 
     public Matrix(int numRow, int numCol) {
@@ -193,6 +193,8 @@ public class Matrix {
     }
 
     public void createSnake(Nodo max, Nodo min) {
-        max.setSnake(min);
+        Snake snake = new Snake(max, min, (char) charOrderAscii++);
+        max.setSnake(snake);
+        min.setSnake(snake);
     }
 }

@@ -11,7 +11,7 @@ public class Nodo {
     private Nodo up;
     private Nodo down;
     private Nodo stair;
-    private Nodo snake;
+    private Snake snake;
 
     public Nodo(int row, int col, int num) {
         this.row = row;
@@ -29,11 +29,11 @@ public class Nodo {
         return stair;
     }
 
-    public void setSnake(Nodo snake) {
+    public void setSnake(Snake snake) {
         this.snake = snake;
     }
 
-    public Nodo getSnake() {
+    public Snake getSnake() {
         return snake;
     }
 
@@ -97,7 +97,7 @@ public class Nodo {
         if (snake == null) {
             return "[" + num + "]";
         } else {
-            return "[" + num + snake.getNum() + "]";
+            return "[" + num + snake.getIdS()+ "]";
         }
     }
 }
