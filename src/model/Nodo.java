@@ -10,11 +10,31 @@ public class Nodo {
     private Nodo prev;
     private Nodo up;
     private Nodo down;
+    private Nodo stair;
+    private Nodo snake;
 
     public Nodo(int row, int col, int num) {
         this.row = row;
         this.col = col;
         this.num = num;
+        this.stair = null;
+        this.snake = null;
+    }
+
+    public void setStair(Nodo stair) {
+        this.stair = stair;
+    }
+
+    public Nodo getStair() {
+        return stair;
+    }
+
+    public void setSnake(Nodo snake) {
+        this.snake = snake;
+    }
+
+    public Nodo getSnake() {
+        return snake;
     }
 
     public int getRow() {
@@ -74,6 +94,10 @@ public class Nodo {
     }
 
     public String toString() {
-        return "[" + num + "]";
+        if (snake == null) {
+            return "[" + num + "]";
+        } else {
+            return "[" + num + snake.getNum() + "]";
+        }
     }
 }

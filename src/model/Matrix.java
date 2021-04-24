@@ -165,4 +165,34 @@ public class Matrix {
             return null;
         }
     }
+
+    public int getMaxNumL(Nodo nd) {
+        Nodo node1 = getNodeRight(nd.getDown());
+        Nodo node2 = getNodeLeft(nd.getDown());
+        if (node1.getNum() > node2.getNum()) {
+            return node1.getNum();
+        } else {
+            return node2.getNum();
+        }
+    }
+
+    private Nodo getNodeRight(Nodo nd) {
+        if (nd.getNext() != null) {
+            return getNodeRight(nd.getNext());
+        } else {
+            return nd;
+        }
+    }
+
+    private Nodo getNodeLeft(Nodo nd) {
+        if (nd.getPrev() != null) {
+            return getNodeLeft(nd.getPrev());
+        } else {
+            return nd;
+        }
+    }
+
+    public void createSnake(Nodo max, Nodo min) {
+        max.setSnake(min);
+    }
 }
