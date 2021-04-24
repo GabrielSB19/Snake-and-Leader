@@ -12,6 +12,7 @@ public class Matrix {
         this.numRow = numRow;
         this.numCol = numCol;
         createMatrix();
+        changeBox(first);
     }
 
     public int getNumRow() {
@@ -31,14 +32,14 @@ public class Matrix {
     }
     
     private void createMatrix (){
-        first = new Nodo(0,0, num++);
+        first = new Nodo(0,0, 0);
         createRow(0,0, first);
     }
     
     private void createRow(int i, int j, Nodo firstRow){
         createCol(i, j+1, firstRow, firstRow.getUp());
         if (i+1 < numRow) {
-            Nodo downFirstRow = new Nodo(i+1, j, num++);
+            Nodo downFirstRow = new Nodo(i+1, j, 0);
             downFirstRow.setUp(firstRow);
             firstRow.setDown(downFirstRow);
             createRow(i+1, j, downFirstRow);
@@ -47,7 +48,7 @@ public class Matrix {
 
     private void createCol(int i, int j, Nodo prev, Nodo rowPrev) {
         if (j < numCol) {
-            Nodo current = new Nodo(i, j, num++);
+            Nodo current = new Nodo(i, j, 0);
             current.setPrev(prev);
             prev.setNext(current);
 
@@ -60,7 +61,7 @@ public class Matrix {
         }
     }
     
-    public String toString(){
+    public String toStringMatrix(){
         String msg;
         msg = toStringRow(first);
         return msg;
@@ -83,5 +84,38 @@ public class Matrix {
             msg += toStringCol(current.getNext());
         }
         return msg;
+    }
+    
+    public void changeBox(Nodo first){
+        changeBoxFirstRow(first);
+    }
+    
+    private void changeBoxFirstRow(Nodo firstRow){
+        if(firstRow.getDown() != null){
+            changeBoxFirstRow(firstRow.getDown());
+        } else {
+            firstRow.setNum(1);
+            changeBoxNextRow(firstRow);
+        }
+    }
+
+    private void changeBoxNextRow(Nodo nextRow) {
+        if(nextRow.getNext() != null){
+            nextRow.getNext().setNum(nextRow.getNum()+1);
+            changeBoxNextRow(nextRow.getNext());
+        } else if (nextRow.getPrev().getUp() != null) {
+            nextRow.getUp().setNum(nextRow.getNum()+1);
+            changeBoxPrevRow(nextRow.getUp());
+        }
+    }
+    
+    private void changeBoxPrevRow(Nodo prevRow){
+        if(prevRow.getPrev() != null){
+            prevRow.getPrev().setNum(prevRow.getNum()+1);
+            changeBoxPrevRow(prevRow.getPrev());
+        } else if(prevRow.getNext().getUp() != null) {
+            prevRow.getUp().setNum(prevRow.getNum()+1);
+            changeBoxNextRow(prevRow.getUp());
+        }
     }
 }

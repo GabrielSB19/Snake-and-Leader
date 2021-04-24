@@ -32,10 +32,8 @@ public class MenuMain {
         switch(choice){
             case 1:
                 System.out.println("Por favor ingresa los parametros del juego en una cadena");
-                int a = Integer.parseInt(sc.nextLine());
-                int b = Integer.parseInt(sc.nextLine());
-                Matrix mx = new Matrix(a, b);
-                System.out.println(mx.toString());
+                mm.params(sc.nextLine());
+                mm.newMatrix();
                 break;
             case 2:
                 System.out.println("Binary");
