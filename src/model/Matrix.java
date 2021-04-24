@@ -4,7 +4,6 @@ public class Matrix {
     
     private int numRow;
     private int numCol;
-    private int num = 1;
     
     private Nodo first;
 

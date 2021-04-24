@@ -2,37 +2,37 @@ package model;
 
 public class Snake {
     
-    private int startS;
-    private int endS;
-    
-    private Snake next;
+    private Nodo firstS;
+    private Nodo lastS;
+    private char idS;
 
-    public Snake(int startS, int endS) {
-        this.startS = startS;
-        this.endS = endS;
+    public Snake(Nodo firstS, Nodo lastS, char idS) {
+        this.firstS = firstS;
+        this.lastS = lastS;
+        this.idS = idS;
     }
 
-    public int getStartS() {
-        return startS;
+    public Nodo getFirstS() {
+        return firstS;
     }
 
-    public void setStartS(int startS) {
-        this.startS = startS;
+    public void setFirstS(Nodo firstS) {
+        this.firstS = firstS;
     }
 
-    public int getEndS() {
-        return endS;
+    public Nodo getLastS() {
+        return lastS;
     }
 
-    public void setEndS(int endS) {
-        this.endS = endS;
+    public void setLastS(Nodo lastS) {
+        this.lastS = lastS;
     }
 
-    public Snake getNext() {
-        return next;
+    public char getIdS() {
+        return idS;
     }
 
-    public void setNext(Snake next) {
-        this.next = next;
+    public void setIdS(char idS) {
+        this.idS = idS;
     }
 }

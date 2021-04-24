@@ -4,6 +4,8 @@ import model.*;
 
 public class MetodhMain {
     
+    Game gm = new Game();
+    
     String [] params = new String [5];
     
     public void params(String param){
@@ -11,7 +13,8 @@ public class MetodhMain {
     }
     
     public void newMatrix(){
-        Matrix mx = new Matrix(Integer.parseInt(params[0]), Integer.parseInt(params[1]));
-        System.out.println(mx.toStringMatrix());
+        int row = Integer.parseInt(params[0]);
+        int col = Integer.parseInt(params[1]);
+        System.out.println(gm.newMatrix(row, col));
     }
 }

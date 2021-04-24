@@ -1,38 +1,38 @@
 package model;
 
 public class Leader {
-    
-    private int startL;
-    private int endL;
-    
-    private Leader next;
 
-    public Leader(int startL, int endL) {
-        this.endL = endL;
-        this.next = next;
+    private Nodo firstL;
+    private Nodo lastL;
+    private char idL;
+
+    public Leader(Nodo firstL, Nodo lastL, char idL) {
+        this.firstL = firstL;
+        this.lastL = lastL;
+        this.idL = idL;
     }
 
-    public int getStartL() {
-        return startL;
+    public Nodo getFirstL() {
+        return firstL;
     }
 
-    public void setStartL(int startL) {
-        this.startL = startL;
+    public void setFirstL(Nodo firstL) {
+        this.firstL = firstL;
     }
 
-    public int getEndL() {
-        return endL;
+    public Nodo getLastL() {
+        return lastL;
     }
 
-    public void setEndL(int endL) {
-        this.endL = endL;
+    public void setLastL(Nodo lastL) {
+        this.lastL = lastL;
     }
 
-    public Leader getNext() {
-        return next;
+    public char getIdL() {
+        return idL;
     }
 
-    public void setNext(Leader next) {
-        this.next = next;
+    public void setIdL(char idL) {
+        this.idL = idL;
     }
 }
