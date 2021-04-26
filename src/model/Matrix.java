@@ -5,6 +5,7 @@ public class Matrix {
     private int numRow;
     private int numCol;
     private int charOrderAscii = 65;
+    private int intOrderAscii = 1;
     private Nodo first;
 
     public Matrix(int numRow, int numCol) {
@@ -166,13 +167,23 @@ public class Matrix {
         }
     }
 
-    public int getMaxNumL(Nodo nd) {
+    public int getMaxNumLSnake(Nodo nd) {
         Nodo node1 = getNodeRight(nd.getDown());
         Nodo node2 = getNodeLeft(nd.getDown());
         if (node1.getNum() > node2.getNum()) {
             return node1.getNum();
         } else {
             return node2.getNum();
+        }
+    }
+
+    public int getMaxNumLLeader(Nodo nd) {
+        Nodo node1 = getNodeRight(nd.getUp());
+        Nodo node2 = getNodeLeft(nd.getUp());
+        if (node1.getNum() > node2.getNum()) {
+            return node2.getNum();
+        } else {
+            return node1.getNum();
         }
     }
 
@@ -197,4 +208,11 @@ public class Matrix {
         max.setSnake(snake);
         min.setSnake(snake);
     }
+
+    public void createLeader(Nodo max, Nodo min) {
+        Leader leader = new Leader(max, min, intOrderAscii++);
+        max.setStair(leader);
+        min.setStair(leader);
+    }
+
 }

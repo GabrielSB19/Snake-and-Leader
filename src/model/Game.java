@@ -3,11 +3,16 @@ package model;
 public class Game {
 
     private int countSnakes = 0;
+    private int countLeaders = 0;
     private Matrix matrix;
     private Random first;
 
     public void setCountSnakes(int n) {
         countSnakes = n;
+    }
+
+    public void setCountLeader(int n) {
+        countLeaders = n;
     }
 
     public String newMatrix(int row, int col) {
@@ -23,7 +28,7 @@ public class Game {
             Nodo maxNd = matrix.searchNode(snakeFirst);
             System.out.println("Max: " + maxNd.getNum());
 
-            int maxNumL = matrix.getMaxNumL(maxNd) + 1;
+            int maxNumL = matrix.getMaxNumLSnake(maxNd) + 1;
             int minNumL = 2;
             int snakeLast = addRandomInt(maxNumL, minNumL);
             Nodo minNd = matrix.searchNode(snakeLast);
@@ -32,6 +37,29 @@ public class Game {
             matrix.createSnake(maxNd, minNd);
             countSnakes++;
             createSnakes(row, col, ammountSnakes);
+            System.out.println(matrix.toStringMatrix());
+        }
+    }
+
+    public void createLeader(int row, int col, int amountLeaders) {
+        if (countLeaders < amountLeaders) {
+            int maxNumF = (matrix.getNumCol() * matrix.getNumRow()) - matrix.getNumCol();
+            int minNumF = 2;
+            int leaderFirst = addRandomInt(maxNumF, minNumF);
+            Nodo maxNd = matrix.searchNode(leaderFirst);
+            System.out.println("Max: " + maxNd.getNum());
+            System.out.println(maxNumF+"Sapa"+minNumF);
+
+            int maxNumL = matrix.getNumCol() * matrix.getNumRow();
+            int minNumL = matrix.getMaxNumLLeader(maxNd);
+            int leaderLast = addRandomInt(maxNumL, minNumL);
+            Nodo minNd = matrix.searchNode(leaderLast);
+            System.out.println("Min: " + minNd.getNum());
+            System.out.println(maxNumL+"SapaSa"+minNumL);
+
+            matrix.createLeader(maxNd, minNd);
+            countLeaders++;
+            createLeader(row, col, amountLeaders);
             System.out.println(matrix.toStringMatrix());
         }
     }

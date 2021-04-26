@@ -26,4 +26,10 @@ public class MethodMain {
         gm.createSnakes(row, col, ammountSnake);
         gm.setCountSnakes(0);
     }
+    
+    public void createLeader() {
+        int amountLeader = Integer.parseInt(params[3]);
+        gm.createLeader(row, col, amountLeader);
+        gm.setCountLeader(0);
+    }
 }

@@ -10,23 +10,23 @@ public class Nodo {
     private Nodo prev;
     private Nodo up;
     private Nodo down;
-    private Nodo stair;
+    private Leader leader;
     private Snake snake;
 
     public Nodo(int row, int col, int num) {
         this.row = row;
         this.col = col;
         this.num = num;
-        this.stair = null;
+        this.leader = null;
         this.snake = null;
     }
 
-    public void setStair(Nodo stair) {
-        this.stair = stair;
+    public void setStair(Leader stair) {
+        this.leader = stair;
     }
 
-    public Nodo getStair() {
-        return stair;
+    public Leader getLeader() {
+        return leader;
     }
 
     public void setSnake(Snake snake) {
@@ -94,10 +94,12 @@ public class Nodo {
     }
 
     public String toString() {
-        if (snake == null) {
+        if (snake == null && leader == null) {
             return "[" + num + "]";
-        } else {
+        } else if (snake != null){
             return "[" + num + snake.getIdS()+ "]";
+        } else {
+            return "[" + num + leader.getIdL()+ "]";
         }
     }
 }

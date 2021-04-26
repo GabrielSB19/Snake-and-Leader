@@ -4,9 +4,9 @@ public class Leader {
 
     private Nodo firstL;
     private Nodo lastL;
-    private char idL;
+    private int idL;
 
-    public Leader(Nodo firstL, Nodo lastL, char idL) {
+    public Leader(Nodo firstL, Nodo lastL, int idL) {
         this.firstL = firstL;
         this.lastL = lastL;
         this.idL = idL;
@@ -28,11 +28,11 @@ public class Leader {
         this.lastL = lastL;
     }
 
-    public char getIdL() {
+    public int getIdL() {
         return idL;
     }
 
-    public void setIdL(char idL) {
+    public void setIdL(int idL) {
         this.idL = idL;
     }
 }
