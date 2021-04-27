@@ -40,4 +40,8 @@ public class MethodMain {
             gm.createPlayerSymb(params[4]);
         }
     }
+    
+    public void soutMatrix() {
+        System.out.println(gm.soutMatrix());
+    }
 }

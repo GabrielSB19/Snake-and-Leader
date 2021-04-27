@@ -12,6 +12,7 @@ public class Nodo {
     private Nodo down;
     private Leader leader;
     private Snake snake;
+    private Player firstPlayer;
 
     public Nodo(int row, int col, int num) {
         this.row = row;
@@ -19,6 +20,7 @@ public class Nodo {
         this.num = num;
         this.leader = null;
         this.snake = null;
+        this.firstPlayer = null;
     }
 
     public void setStair(Leader stair) {
@@ -96,10 +98,20 @@ public class Nodo {
     public String toString() {
         if (snake == null && leader == null) {
             return "[" + num + "]";
-        } else if (snake != null){
-            return "[" + num + snake.getIdS()+ "]";
+        } else if (snake != null) {
+            return "[" + num + snake.getIdS() + "]";
         } else {
-            return "[" + num + leader.getIdL()+ "]";
+            return "[" + num + leader.getIdL() + "]";
+        }
+    }
+
+    public String toStringGame() {
+        if (snake == null && leader == null) {
+            return "[ ]";
+        } else if (snake != null) {
+            return "[" + snake.getIdS() + "]";
+        } else {
+            return "[" + leader.getIdL() + "]";
         }
     }
 }

@@ -37,6 +37,8 @@ public class MenuMain {
                 mm.createSnakes();
                 mm.createLeader();
                 mm.createPlayers();
+                mm.soutMatrix();
+                startGame();
                 break;
             case 2:
                 System.out.println("Binary");
@@ -50,6 +52,14 @@ public class MenuMain {
             default:
                 System.out.println("Por favor selecciona una opcion correcta");
                 break;
+        }
+    }
+
+    public void startGame() {
+        String st = sc.nextLine();
+        if (st.equals("")) {
+            Matrix.setCentinela(false);
+            mm.soutMatrix();
         }
     }
 

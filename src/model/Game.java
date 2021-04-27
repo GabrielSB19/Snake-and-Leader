@@ -23,8 +23,11 @@ public class Game {
         countLeaders = n;
     }
 
-    public String newMatrix(int row, int col) {
+    public void newMatrix(int row, int col) {
         matrix = new Matrix(row, col);
+    }
+    
+    public String soutMatrix() {
         return matrix.toStringMatrix();
     }
 
@@ -66,7 +69,7 @@ public class Game {
 
     public void createPlayers(int n) {
         if (n > 0) {
-            Player newPlayer = new Player((char) asciiPlayers++, 0, 0, false, param);
+            Player newPlayer = new Player((char) asciiPlayers++, 0, 1, false, param);
             if (firstPlayer == null) {
                 firstPlayer = newPlayer;
             } else {
@@ -93,7 +96,7 @@ public class Game {
 
     private void addPlayers(String param, int n) {
         if (n < lengthPlayer) {
-            Player newPlayer = new Player(param.charAt(n), 0, 0, false, param);
+            Player newPlayer = new Player(param.charAt(n), 0, 1, false, param);
             if (firstPlayer == null) {
                 firstPlayer = newPlayer;
             } else {
