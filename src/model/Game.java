@@ -10,7 +10,7 @@ public class Game {
     private String param;
     private int asciiPlayers = 33;
     private int lengthPlayer = 0;
-    
+
     public void setParam(String param) {
         this.param = param;
     }
@@ -34,18 +34,15 @@ public class Game {
             int minNumF = (matrix.getNumCol() + 1);
             int snakeFirst = addRandomInt(maxNumF, minNumF);
             Nodo maxNd = matrix.searchNode(snakeFirst);
-            System.out.println("Max: " + maxNd.getNum());
 
             int maxNumL = matrix.getMaxNumLSnake(maxNd) + 1;
             int minNumL = 2;
             int snakeLast = addRandomInt(maxNumL, minNumL);
             Nodo minNd = matrix.searchNode(snakeLast);
-            System.out.println("Min: " + minNd.getNum());
 
             matrix.createSnake(maxNd, minNd);
             countSnakes++;
             createSnakes(row, col, ammountSnakes);
-            System.out.println(matrix.toStringMatrix());
         }
     }
 
@@ -55,20 +52,15 @@ public class Game {
             int minNumF = 2;
             int leaderFirst = addRandomInt(maxNumF, minNumF);
             Nodo maxNd = matrix.searchNode(leaderFirst);
-            System.out.println("Max: " + maxNd.getNum());
-            System.out.println(maxNumF + "Sapa" + minNumF);
 
             int maxNumL = matrix.getNumCol() * matrix.getNumRow();
             int minNumL = matrix.getMaxNumLLeader(maxNd);
             int leaderLast = addRandomInt(maxNumL, minNumL);
             Nodo minNd = matrix.searchNode(leaderLast);
-            System.out.println("Min: " + minNd.getNum());
-            System.out.println(maxNumL + "SapaSa" + minNumL);
 
             matrix.createLeader(maxNd, minNd);
             countLeaders++;
             createLeader(row, col, amountLeaders);
-            System.out.println(matrix.toStringMatrix());
         }
     }
 
@@ -80,7 +72,8 @@ public class Game {
             } else {
                 addPlayers(firstPlayer, newPlayer);
             }
-            createPlayers(n--);
+            n -= 1;
+            createPlayers(n);
         }
     }
 
@@ -91,13 +84,13 @@ public class Game {
             addPlayers(py.getNext(), newPy);
         }
     }
-    
+
     public void createPlayerSymb(String param) {
         lengthPlayer = param.length();
         int aux = 0;
         addPlayers(param, aux);
     }
-    
+
     private void addPlayers(String param, int n) {
         if (n < lengthPlayer) {
             Player newPlayer = new Player(param.charAt(n), 0, 0, false, param);
@@ -106,7 +99,8 @@ public class Game {
             } else {
                 addPlayers(firstPlayer, newPlayer);
             }
-            addPlayers(param, n++);
+            n += 1;
+            addPlayers(param, n);
         }
     }
 

@@ -35,8 +35,8 @@ public class MenuMain {
                 mm.params(sc.nextLine());
                 mm.newMatrix();
                 mm.createSnakes();
-                System.out.println("Se crean escaleras");
                 mm.createLeader();
+                mm.createPlayers();
                 break;
             case 2:
                 System.out.println("Binary");

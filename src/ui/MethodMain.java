@@ -17,7 +17,7 @@ public class MethodMain {
     public void newMatrix() {
         row = Integer.parseInt(params[0]);
         col = Integer.parseInt(params[1]);
-        System.out.println(gm.newMatrix(row, col));
+        gm.newMatrix(row, col);
     }
 
     public void createSnakes() {
