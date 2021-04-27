@@ -6,6 +6,14 @@ public class Game {
     private int countLeaders = 0;
     private Matrix matrix;
     private Random first;
+    private Player firstPlayer;
+    private String param;
+    private int asciiPlayers = 33;
+    private int lengthPlayer = 0;
+    
+    public void setParam(String param) {
+        this.param = param;
+    }
 
     public void setCountSnakes(int n) {
         countSnakes = n;
@@ -48,19 +56,57 @@ public class Game {
             int leaderFirst = addRandomInt(maxNumF, minNumF);
             Nodo maxNd = matrix.searchNode(leaderFirst);
             System.out.println("Max: " + maxNd.getNum());
-            System.out.println(maxNumF+"Sapa"+minNumF);
+            System.out.println(maxNumF + "Sapa" + minNumF);
 
             int maxNumL = matrix.getNumCol() * matrix.getNumRow();
             int minNumL = matrix.getMaxNumLLeader(maxNd);
             int leaderLast = addRandomInt(maxNumL, minNumL);
             Nodo minNd = matrix.searchNode(leaderLast);
             System.out.println("Min: " + minNd.getNum());
-            System.out.println(maxNumL+"SapaSa"+minNumL);
+            System.out.println(maxNumL + "SapaSa" + minNumL);
 
             matrix.createLeader(maxNd, minNd);
             countLeaders++;
             createLeader(row, col, amountLeaders);
             System.out.println(matrix.toStringMatrix());
+        }
+    }
+
+    public void createPlayers(int n) {
+        if (n > 0) {
+            Player newPlayer = new Player((char) asciiPlayers++, 0, 0, false, param);
+            if (firstPlayer == null) {
+                firstPlayer = newPlayer;
+            } else {
+                addPlayers(firstPlayer, newPlayer);
+            }
+            createPlayers(n--);
+        }
+    }
+
+    private void addPlayers(Player py, Player newPy) {
+        if (py.getNext() == null) {
+            py.setNext(newPy);
+        } else {
+            addPlayers(py.getNext(), newPy);
+        }
+    }
+    
+    public void createPlayerSymb(String param) {
+        lengthPlayer = param.length();
+        int aux = 0;
+        addPlayers(param, aux);
+    }
+    
+    private void addPlayers(String param, int n) {
+        if (n < lengthPlayer) {
+            Player newPlayer = new Player(param.charAt(n), 0, 0, false, param);
+            if (firstPlayer == null) {
+                firstPlayer = newPlayer;
+            } else {
+                addPlayers(firstPlayer, newPlayer);
+            }
+            addPlayers(param, n++);
         }
     }
 

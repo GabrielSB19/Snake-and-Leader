@@ -2,28 +2,29 @@ package model;
 
 public class Player {
 
-    private String symbol;
+    private char symbol;
     private int amountPlay;
     private int position;
     private boolean finish;
-
+    private String param;
     private Player next;
     private Player left;
     private Player right;
     private Player parent;
 
-    public Player(String symbol, int amountPlay, int position, boolean finish) {
+    public Player(char symbol, int amountPlay, int position, boolean finish, String param) {
         this.symbol = symbol;
         this.amountPlay = amountPlay;
         this.position = position;
         this.finish = false;
+        this.param = param;
     }
 
-    public String getSymbol() {
+    public char getSymbol() {
         return symbol;
     }
 
-    public void setSymbol(String symbol) {
+    public void setSymbol(char symbol) {
         this.symbol = symbol;
     }
 
