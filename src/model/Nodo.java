@@ -9,7 +9,7 @@ public class Nodo {
 
     private int asciiPlayers = 33;
     private int lengthPlayer = 0;
-
+    private int turn = 1;
     private Nodo next;
     private Nodo prev;
     private Nodo up;
@@ -25,6 +25,14 @@ public class Nodo {
         this.leader = null;
         this.snake = null;
         this.firstPlayer = null;
+    }
+
+    public void setFirstPlayer(Player py) {
+        firstPlayer = py;
+    }
+
+    public Player getFirstPlayer() {
+        return firstPlayer;
     }
 
     public void setStair(Leader stair) {
@@ -113,7 +121,7 @@ public class Nodo {
         /*
         Player temp = firstPlayer;
         while(temp != null){
-            System.out.println(temp.getPosition().getNum());
+            System.out.println(temp.getTurn());
             temp = temp.getNext();
         }
          */
@@ -129,7 +137,7 @@ public class Nodo {
     }
 
     public void createPlayer(Nodo pos, String param) {
-        Player newPlayer = new Player((char) asciiPlayers++, 0, pos, false, param);
+        Player newPlayer = new Player((char) asciiPlayers++, 0, pos, false, param, turn++);
         if (firstPlayer == null) {
             firstPlayer = newPlayer;
         } else {
@@ -138,7 +146,7 @@ public class Nodo {
     }
 
     public void createPlayerSymb(Nodo pos, String param, int n) {
-        Player newPlayer = new Player(param.charAt(n), 0, pos, false, param);
+        Player newPlayer = new Player(param.charAt(n), 0, pos, false, param, turn++);
         if (firstPlayer == null) {
             firstPlayer = newPlayer;
         } else {

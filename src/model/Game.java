@@ -6,8 +6,9 @@ public class Game {
     private int countLeaders = 0;
     private Matrix matrix;
     private Random first;
-    private Player firstPlayer;
     private String param;
+    private int actualTurn = 1;
+    private Player firstPlayer;
 
     public void setParam(String param) {
         this.param = param;
@@ -89,7 +90,6 @@ public class Game {
         }
     }
 
-
     public int addRandomInt(int maxNum, int minNum) {
         int randomPos = (int) Math.floor(Math.random() * (maxNum - minNum) + minNum);
         if (addRandom(randomPos)) {
@@ -130,5 +130,21 @@ public class Game {
         } else {
             return getLastRandom(rd.getNext());
         }
+    }
+
+    public int throwDice() {
+        int maxDice = 7;
+        int minDice = 1;
+        //MaxDice - 1
+        int dice = (int) Math.floor(Math.random() * (maxDice - minDice) + minDice);
+        return dice;
+    }
+    
+    public void setPlayersGame() {
+        Nodo first = matrix.searchNode(1);
+        firstPlayer = first.getFirstPlayer();
+    }
+    
+    public void moveGame(int dice) {
     }
 }

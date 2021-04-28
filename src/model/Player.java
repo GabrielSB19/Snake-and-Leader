@@ -7,19 +7,25 @@ public class Player {
     private Nodo position;
     private boolean finish;
     private String param;
+    private int turn;
     private Player next;
     private Player left;
     private Player right;
     private Player parent;
 
-    public Player(char symbol, int amountPlay, Nodo position, boolean finish, String param) {
+    public Player(char symbol, int amountPlay, Nodo position, boolean finish, String param, int turn) {
         this.symbol = symbol;
         this.amountPlay = amountPlay;
         this.position = position;
         this.finish = false;
         this.param = param;
+        this.turn = turn;
     }
-
+    
+    public int getTurn() {
+        return turn;
+    }
+    
     public char getSymbol() {
         return symbol;
     }

@@ -37,6 +37,7 @@ public class MenuMain {
                 mm.createSnakes();
                 mm.createLeader();
                 mm.createPlayers();
+                mm.setPlayersGame();
                 mm.soutMatrix();
                 startGame();
                 playTheGame();
@@ -63,22 +64,25 @@ public class MenuMain {
             mm.soutMatrix();
         }
     }
-    
-    public void playTheGame(){
+
+    public void playTheGame() {
         String st = sc.nextLine();
         if (st.equals("")) {
+            int dice = mm.throwDice();
+            System.out.println("El jugador" + "test" + "y obtuvo el puntaje " + dice);
+            mm.moveGame(dice);
             playTheGame();
         } else if (st.equalsIgnoreCase("num")) {
             caseNum();
             playTheGame();
-        } else if(st.equalsIgnoreCase("simul")){
+        } else if (st.equalsIgnoreCase("simul")) {
             System.out.println("Yes");
-        } else if(st.equalsIgnoreCase("Menu")){
+        } else if (st.equalsIgnoreCase("Menu")) {
             startProgram();
         }
     }
-    
-    public void caseNum(){
+
+    public void caseNum() {
         Matrix.setCentinela(true);
         mm.soutMatrix();
         Matrix.setCentinela(false);

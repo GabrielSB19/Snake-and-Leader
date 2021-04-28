@@ -3,7 +3,7 @@ package ui;
 import model.*;
 
 public class MethodMain {
-
+    
     Game gm = new Game();
     String[] params = new String[5];
     private int row = 0;
@@ -12,6 +12,10 @@ public class MethodMain {
     public void params(String param) {
         gm.setParam(param);
         params = param.split(" ");
+    }
+
+    public void moveGame(int dice) {
+        gm.moveGame(dice);
     }
 
     public void newMatrix() {
@@ -25,13 +29,13 @@ public class MethodMain {
         gm.createSnakes(row, col, ammountSnake);
         gm.setCountSnakes(0);
     }
-    
+
     public void createLeader() {
         int amountLeader = Integer.parseInt(params[3]);
         gm.createLeader(row, col, amountLeader);
         gm.setCountLeader(0);
     }
-    
+
     public void createPlayers() {
         try {
             int ammountPlayers = Integer.parseInt(params[4]);
@@ -41,7 +45,15 @@ public class MethodMain {
         }
     }
     
+    public void setPlayersGame() {
+        gm.setPlayersGame();
+    }
+
     public void soutMatrix() {
         System.out.println(gm.soutMatrix());
+    }
+
+    public int throwDice() {
+        return gm.throwDice();
     }
 }
