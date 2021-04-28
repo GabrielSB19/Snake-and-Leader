@@ -118,13 +118,11 @@ public class Nodo {
     }
 
     public String toStringGame() {
-        /*
         Player temp = firstPlayer;
         while(temp != null){
-            System.out.println(temp.getTurn());
+            System.out.println(temp.getSymbol()+"Sapa"+temp.getPosition().getNum());
             temp = temp.getNext();
         }
-         */
         stringPlayer();
         String aux = players;
         if (snake == null && leader == null) {
@@ -181,8 +179,11 @@ public class Nodo {
     public void stringPlayer() {
         if (firstPlayer == null) {
             players = "";
-        } else {
-            stringPlayer(firstPlayer);
+        } else if (firstPlayer != null) {
+            players += firstPlayer.getSymbol();
+            if (firstPlayer.getNext() != null) {
+                stringPlayer(firstPlayer.getNext());
+            }
         }
     }
 
@@ -194,25 +195,28 @@ public class Nodo {
     }
 
     public void removePlayerNodo(Player py) {
-        if (firstPlayer == py) {
-            firstPlayer = firstPlayer.getNext();
+        if(firstPlayer == py){
+            Player current = firstPlayer.getNext();
+            firstPlayer = current;
             players = "";
         } else {
             removePlayer(firstPlayer, py);
         }
     }
 
-    private void removePlayer(Player player, Player temp) {
-        if (player.getNext() == temp) {
-            player.setNext(temp.getNext());
-            players = "";
-        } else {
-            removePlayer(player.getNext(), temp);
+    private void removePlayer(Player player, Player py) {
+        if(player != null){
+            if(player == py){
+                Player current = player.getNext();
+                player = current;
+                players = "";
+            } else {
+                removePlayer(player.getNext(), py);
+            }
         }
     }
 
     public void addPlayerNodo(Player temp) {
-        //Player temp = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(), py.getParam(), py.getTurn());
         if (firstPlayer == null) {
             firstPlayer = temp;
         } else {

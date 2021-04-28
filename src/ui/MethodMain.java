@@ -15,7 +15,8 @@ public class MethodMain {
     }
 
     public void moveGame(Player py, int dice) {
-        gm.moveGame(py, dice);
+        gm.showFirts();
+        gm.moveGame(dice);
     }
     
     public Player getPlayer() {
@@ -49,10 +50,6 @@ public class MethodMain {
             gm.createPlayerSymb(params[4]);
             gm.setMaxTurns(params[4].length() + 1);
         }
-    }
-
-    public void setPlayersGame() {
-        gm.setPlayersGame();
     }
 
     public void soutMatrix() {
