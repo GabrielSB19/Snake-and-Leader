@@ -7,8 +7,13 @@ public class Game {
     private Matrix matrix;
     private Random first;
     private String param;
+    private int maxTurns;
     private int actualTurn = 1;
     private Player firstPlayer;
+
+    public void setMaxTurns(int n) {
+        maxTurns = n;
+    }
 
     public void setParam(String param) {
         this.param = param;
@@ -139,12 +144,38 @@ public class Game {
         int dice = (int) Math.floor(Math.random() * (maxDice - minDice) + minDice);
         return dice;
     }
-    
+
     public void setPlayersGame() {
         Nodo first = matrix.searchNode(1);
         firstPlayer = first.getFirstPlayer();
     }
-    
-    public void moveGame(int dice) {
+
+    public Player getSymbolPlayer() {
+        Player temp = firstPlayer;
+        while (temp != null) {            
+            System.out.println(temp.getSymbol() + " plis");
+            temp = temp.getNext();
+        }
+        Nodo nodo = matrix.searchNode(1);
+        return searchPlayerTurn(firstPlayer);
+    }
+
+    public void moveGame(Player py, int dice) {
+        Nodo nodoF = matrix.searchNode(py.getPosition().getNum());
+        Nodo nodoL = matrix.searchNode(nodoF.getNum() + dice);
+        nodoF.removePlayerNodo(py);
+        nodoL.addPlayerNodo(py);
+        actualTurn++;
+        actualTurn = (actualTurn == maxTurns) ? 1 : actualTurn;
+    }
+
+    private Player searchPlayerTurn(Player py) {
+        System.out.println(py.getTurn());
+        System.out.println(actualTurn);
+        if (py.getTurn() == actualTurn) {
+            return py;
+        } else {
+            return searchPlayerTurn(py.getNext());
+        }
     }
 }

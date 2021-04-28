@@ -69,8 +69,10 @@ public class MenuMain {
         String st = sc.nextLine();
         if (st.equals("")) {
             int dice = mm.throwDice();
-            System.out.println("El jugador" + "test" + "y obtuvo el puntaje " + dice);
-            mm.moveGame(dice);
+            Player py = mm.getPlayer();
+            System.out.println("El jugador " + py.getSymbol() + " y obtuvo el puntaje " + dice);
+            mm.moveGame(py, dice);
+            mm.soutMatrix();
             playTheGame();
         } else if (st.equalsIgnoreCase("num")) {
             caseNum();

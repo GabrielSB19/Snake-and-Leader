@@ -21,11 +21,15 @@ public class Player {
         this.param = param;
         this.turn = turn;
     }
-    
+
+    public String getParam() {
+        return param;
+    }
+
     public int getTurn() {
         return turn;
     }
-    
+
     public char getSymbol() {
         return symbol;
     }

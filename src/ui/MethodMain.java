@@ -3,19 +3,23 @@ package ui;
 import model.*;
 
 public class MethodMain {
-    
+
     Game gm = new Game();
     String[] params = new String[5];
     private int row = 0;
     private int col = 0;
-    
+
     public void params(String param) {
         gm.setParam(param);
         params = param.split(" ");
     }
 
-    public void moveGame(int dice) {
-        gm.moveGame(dice);
+    public void moveGame(Player py, int dice) {
+        gm.moveGame(py, dice);
+    }
+    
+    public Player getPlayer() {
+        return gm.getSymbolPlayer();
     }
 
     public void newMatrix() {
@@ -40,11 +44,13 @@ public class MethodMain {
         try {
             int ammountPlayers = Integer.parseInt(params[4]);
             gm.createPlayers(ammountPlayers);
+            gm.setMaxTurns(ammountPlayers + 1);
         } catch (Exception e) {
             gm.createPlayerSymb(params[4]);
+            gm.setMaxTurns(params[4].length() + 1);
         }
     }
-    
+
     public void setPlayersGame() {
         gm.setPlayersGame();
     }

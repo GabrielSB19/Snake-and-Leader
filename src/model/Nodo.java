@@ -192,4 +192,31 @@ public class Nodo {
             stringPlayer(player.getNext());
         }
     }
+
+    public void removePlayerNodo(Player py) {
+        if (firstPlayer == py) {
+            firstPlayer = firstPlayer.getNext();
+            players = "";
+        } else {
+            removePlayer(firstPlayer, py);
+        }
+    }
+
+    private void removePlayer(Player player, Player py) {
+        if (player.getNext() == py) {
+            player.setNext(player.getNext().getNext());
+            players = "";
+        } else {
+            removePlayer(player.getNext(), py);
+        }
+    }
+
+    public void addPlayerNodo(Player py) {
+        Player temp = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(), py.getParam(), py.getTurn());
+        if (firstPlayer == null) {
+            firstPlayer = temp;
+        } else {
+            addPlayers(firstPlayer, temp);
+        }
+    }
 }
