@@ -37,7 +37,7 @@ public class MethodMain {
             int ammountPlayers = Integer.parseInt(params[4]);
             gm.createPlayers(ammountPlayers);
         } catch (Exception e) {
-            gm.createPlayerSymb(params[4]);
+            //gm.createPlayerSymb(params[4]);
         }
     }
     

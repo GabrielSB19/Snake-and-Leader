@@ -4,7 +4,7 @@ public class Player {
 
     private char symbol;
     private int amountPlay;
-    private int position;
+    private Nodo position;
     private boolean finish;
     private String param;
     private Player next;
@@ -12,7 +12,7 @@ public class Player {
     private Player right;
     private Player parent;
 
-    public Player(char symbol, int amountPlay, int position, boolean finish, String param) {
+    public Player(char symbol, int amountPlay, Nodo position, boolean finish, String param) {
         this.symbol = symbol;
         this.amountPlay = amountPlay;
         this.position = position;
@@ -36,11 +36,11 @@ public class Player {
         this.amountPlay = amountPlay;
     }
 
-    public int getPosition() {
+    public Nodo getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Nodo position) {
         this.position = position;
     }
 

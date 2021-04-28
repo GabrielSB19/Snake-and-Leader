@@ -15,11 +15,11 @@ public class Matrix {
         createMatrix();
         changeBox(first);
     }
-    
+
     public static void setCentinela(boolean b) {
         centinela = b;
     }
-    
+
     public Nodo getFirst() {
         return first;
     }
@@ -223,5 +223,4 @@ public class Matrix {
         max.setStair(leader);
         min.setStair(leader);
     }
-
 }

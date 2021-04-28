@@ -5,6 +5,10 @@ public class Nodo {
     private int row;
     private int col;
     private int num;
+    private String players = "";
+
+    private int asciiPlayers = 33;
+    private int lengthPlayer = 0;
 
     private Nodo next;
     private Nodo prev;
@@ -106,12 +110,69 @@ public class Nodo {
     }
 
     public String toStringGame() {
+        /*
+        Player temp = firstPlayer;
+        while(temp != null){
+            System.out.println(temp.getPosition().getNum());
+            temp = temp.getNext();
+        }
+*/
+        stringPlayer();
+        String aux = players;
         if (snake == null && leader == null) {
-            return "[ ]";
+            return "["+aux+"]";
         } else if (snake != null) {
-            return "[" + snake.getIdS() + "]";
+            return "[" + snake.getIdS()+aux+ "]";
         } else {
-            return "[" + leader.getIdL() + "]";
+            return "[" + leader.getIdL() +aux+"]";
+        }
+    }
+
+    public void createPlayer(Nodo pos, String param) {
+        Player newPlayer = new Player((char) asciiPlayers++, 0, pos, false, param);
+        if (firstPlayer == null) {
+            firstPlayer = newPlayer;
+        } else {
+            addPlayers(firstPlayer, newPlayer);
+        }
+    }
+    
+    private void addPlayers(Player py, Player newPy) {
+        if (py.getNext() == null) {
+            py.setNext(newPy);
+        } else {
+            addPlayers(py.getNext(), newPy);
+        }
+    }
+
+    public void listPlayer(Player player) {
+        if (firstPlayer == null) {
+            firstPlayer = player;
+        } else {
+            addPlayerNext(firstPlayer, player);
+        }
+    }
+
+    private void addPlayerNext(Player current, Player player) {
+        if (current.getNext() == null) {
+            current.setNext(player);
+        } else {
+            addPlayerNext(current.getNext(), player);
+        }
+    }
+
+    public void stringPlayer() {
+        if (firstPlayer == null) {
+            players = "";
+        } else {
+             stringPlayer(firstPlayer);
+        }
+    }
+
+    private void stringPlayer(Player player) {
+        if (player != null) {
+            players += player.getSymbol();
+            stringPlayer(player.getNext());
         }
     }
 }

@@ -8,8 +8,6 @@ public class Game {
     private Random first;
     private Player firstPlayer;
     private String param;
-    private int asciiPlayers = 33;
-    private int lengthPlayer = 0;
 
     public void setParam(String param) {
         this.param = param;
@@ -26,7 +24,7 @@ public class Game {
     public void newMatrix(int row, int col) {
         matrix = new Matrix(row, col);
     }
-    
+
     public String soutMatrix() {
         return matrix.toStringMatrix();
     }
@@ -69,25 +67,14 @@ public class Game {
 
     public void createPlayers(int n) {
         if (n > 0) {
-            Player newPlayer = new Player((char) asciiPlayers++, 0, 1, false, param);
-            if (firstPlayer == null) {
-                firstPlayer = newPlayer;
-            } else {
-                addPlayers(firstPlayer, newPlayer);
-            }
+            Nodo pos = matrix.searchNode(1);
+            pos.createPlayer(pos, param);
             n -= 1;
             createPlayers(n);
         }
     }
 
-    private void addPlayers(Player py, Player newPy) {
-        if (py.getNext() == null) {
-            py.setNext(newPy);
-        } else {
-            addPlayers(py.getNext(), newPy);
-        }
-    }
-
+/*
     public void createPlayerSymb(String param) {
         lengthPlayer = param.length();
         int aux = 0;
@@ -96,7 +83,8 @@ public class Game {
 
     private void addPlayers(String param, int n) {
         if (n < lengthPlayer) {
-            Player newPlayer = new Player(param.charAt(n), 0, 1, false, param);
+            Nodo pos = matrix.searchNode(1);
+            Player newPlayer = new Player(param.charAt(n), 0, pos, false, param);
             if (firstPlayer == null) {
                 firstPlayer = newPlayer;
             } else {
@@ -106,6 +94,7 @@ public class Game {
             addPlayers(param, n);
         }
     }
+*/
 
     public int addRandomInt(int maxNum, int minNum) {
         int randomPos = (int) Math.floor(Math.random() * (maxNum - minNum) + minNum);
