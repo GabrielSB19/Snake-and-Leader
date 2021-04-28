@@ -74,27 +74,21 @@ public class Game {
         }
     }
 
-/*
     public void createPlayerSymb(String param) {
-        lengthPlayer = param.length();
+        int lengthPlayer = param.length();
         int aux = 0;
-        addPlayers(param, aux);
+        addPlayers(param, aux, lengthPlayer);
     }
 
-    private void addPlayers(String param, int n) {
+    private void addPlayers(String param, int n, int lengthPlayer) {
         if (n < lengthPlayer) {
             Nodo pos = matrix.searchNode(1);
-            Player newPlayer = new Player(param.charAt(n), 0, pos, false, param);
-            if (firstPlayer == null) {
-                firstPlayer = newPlayer;
-            } else {
-                addPlayers(firstPlayer, newPlayer);
-            }
+            pos.createPlayerSymb(pos, param, n);
             n += 1;
-            addPlayers(param, n);
+            addPlayers(param, n, lengthPlayer);
         }
     }
-*/
+
 
     public int addRandomInt(int maxNum, int minNum) {
         int randomPos = (int) Math.floor(Math.random() * (maxNum - minNum) + minNum);

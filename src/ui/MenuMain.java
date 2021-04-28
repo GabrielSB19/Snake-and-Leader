@@ -39,6 +39,7 @@ public class MenuMain {
                 mm.createPlayers();
                 mm.soutMatrix();
                 startGame();
+                playTheGame();
                 break;
             case 2:
                 System.out.println("Binary");
@@ -61,6 +62,28 @@ public class MenuMain {
             Matrix.setCentinela(false);
             mm.soutMatrix();
         }
+    }
+    
+    public void playTheGame(){
+        String st = sc.nextLine();
+        if (st.equals("")) {
+            playTheGame();
+        } else if (st.equalsIgnoreCase("num")) {
+            caseNum();
+            playTheGame();
+        } else if(st.equalsIgnoreCase("simul")){
+            System.out.println("Yes");
+        } else if(st.equalsIgnoreCase("Menu")){
+            startProgram();
+        }
+    }
+    
+    public void caseNum(){
+        Matrix.setCentinela(true);
+        mm.soutMatrix();
+        Matrix.setCentinela(false);
+        sc.nextLine();
+        mm.soutMatrix();
     }
 
     @SuppressWarnings("InfiniteRecursion")

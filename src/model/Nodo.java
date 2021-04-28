@@ -116,15 +116,15 @@ public class Nodo {
             System.out.println(temp.getPosition().getNum());
             temp = temp.getNext();
         }
-*/
+         */
         stringPlayer();
         String aux = players;
         if (snake == null && leader == null) {
-            return "["+aux+"]";
+            return "[" + aux + "]";
         } else if (snake != null) {
-            return "[" + snake.getIdS()+aux+ "]";
+            return "[" + snake.getIdS() + aux + "]";
         } else {
-            return "[" + leader.getIdL() +aux+"]";
+            return "[" + leader.getIdL() + aux + "]";
         }
     }
 
@@ -136,7 +136,16 @@ public class Nodo {
             addPlayers(firstPlayer, newPlayer);
         }
     }
-    
+
+    public void createPlayerSymb(Nodo pos, String param, int n) {
+        Player newPlayer = new Player(param.charAt(n), 0, pos, false, param);
+        if (firstPlayer == null) {
+            firstPlayer = newPlayer;
+        } else {
+            addPlayers(firstPlayer, newPlayer);
+        }
+    }
+
     private void addPlayers(Player py, Player newPy) {
         if (py.getNext() == null) {
             py.setNext(newPy);
@@ -165,7 +174,7 @@ public class Nodo {
         if (firstPlayer == null) {
             players = "";
         } else {
-             stringPlayer(firstPlayer);
+            stringPlayer(firstPlayer);
         }
     }
 
