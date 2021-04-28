@@ -26,6 +26,10 @@ public class Nodo {
         this.snake = null;
         this.firstPlayer = null;
     }
+    
+    public void setPlayerString(String s){
+        players = s;
+    }
 
     public void setFirstPlayer(Player py) {
         firstPlayer = py;
@@ -126,12 +130,16 @@ public class Nodo {
         stringPlayer();
         String aux = players;
         if (snake == null && leader == null) {
+            players = "";
             return "[" + aux + "]";
         } else if (snake != null) {
+            players = "";
             return "[" + snake.getIdS() + aux + "]";
         } else {
+            players = "";
             return "[" + leader.getIdL() + aux + "]";
         }
+        
     }
 
     public void createPlayer(Nodo pos, String param) {
@@ -194,19 +202,26 @@ public class Nodo {
         }
     }
 
-    public void removePlayerNodo(Player py) {
-        if(firstPlayer == py){
-            Player current = firstPlayer.getNext();
-            firstPlayer = current;
-            players = "";
+    public void removePlayerNodo(char py) {
+        if (firstPlayer.getSymbol() == py) {
+            if (firstPlayer.getNext() == null) {
+                firstPlayer = null;
+                players = "";
+                System.out.println("Porque yo he sido bueno");
+            } else {
+                Player current = firstPlayer.getNext();
+                firstPlayer = current;
+                players = "";
+            }
+
         } else {
             removePlayer(firstPlayer, py);
         }
     }
 
-    private void removePlayer(Player player, Player py) {
+    private void removePlayer(Player player, char py) {
         if(player != null){
-            if(player == py){
+            if(player.getSymbol() == py){
                 Player current = player.getNext();
                 player = current;
                 players = "";

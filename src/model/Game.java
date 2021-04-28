@@ -146,64 +146,49 @@ public class Game {
         int dice = (int) Math.floor(Math.random() * (maxDice - minDice) + minDice);
         return dice;
     }
-    
-    public void showFirts(){
-        Player temp = firstPlayerGame;
-        while(temp != null){
-            System.out.println(temp.getSymbol()+"Porfa");
-            temp = temp.getNext();
-        }
-    }
 
     public Player getSymbolPlayer() {
-        /*
-        if (firstPlayerGame == searchPlayerTurn(firstPlayerGame)) {
-            return firstPlayerGame;
-        } else {
-            return searchPlayerTurn(firstPlayerGame);
-        }
-*/
-        return null;
-
+        return searchPlayerTurn();
     }
 
     public void moveGame(int dice) {
         Player py = searchPlayerTurn();
         int numF = py.getPosition().getNum();
         Nodo nodoF = matrix.searchNode(numF);
-        nodoF.removePlayerNodo(py);
+        nodoF.removePlayerNodo(py.getSymbol());
         Nodo nodoL = matrix.searchNode(nodoF.getNum() + dice);
         py.setPosition(nodoL);
         nodoL.addPlayerNodo(createNewPlayerinNodo(py));
         actualTurn++;
-        System.out.println(actualTurn + "p");
         if(actualTurn == maxTurns){
             actualTurn = 1;
         }
+
     }
-    
-    public Player createNewPlayerinNodo(Player py){
+
+    public Player createNewPlayerinNodo(Player py) {
         Player newPlayer = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(), py.getParam(), py.getTurn());
+        newPlayer.setNext(null);
         return newPlayer;
     }
 
-    public Player searchPlayerTurn(){
-        if(firstPlayerGame.getTurn() == actualTurn){
+    public Player searchPlayerTurn() {
+        if (firstPlayerGame.getTurn() == actualTurn) {
             return firstPlayerGame;
         } else {
             return searchPlayerTurn(firstPlayerGame, actualTurn);
         }
     }
-    
+
     private Player searchPlayerTurn(Player py, int tourn) {
         if (py.getNext() != null) {
-            if(py.getNext().getTurn() == tourn){
+            if (py.getNext().getTurn() == tourn) {
                 return py.getNext();
             } else {
                 return searchPlayerTurn(py.getNext(), tourn);
             }
         }
-        System.out.println(tourn+"F");
+        System.out.println(tourn + "F");
         Player se = new Player('&', 1, null, false, "a", 8);
         return se;
     }

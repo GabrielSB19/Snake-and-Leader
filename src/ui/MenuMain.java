@@ -69,7 +69,7 @@ public class MenuMain {
         if (st.equals("")) {
             int dice = mm.throwDice();
             Player py = mm.getPlayer();
-            //System.out.println("El jugador " + py.getSymbol() + " y obtuvo el puntaje " + dice);
+            System.out.println("El jugador " + py.getSymbol() + " lanzo y obtuvo el puntaje " + dice);
             mm.moveGame(py, dice);
             mm.soutMatrix();
             playTheGame();

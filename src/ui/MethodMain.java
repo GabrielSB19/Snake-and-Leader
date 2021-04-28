@@ -15,7 +15,6 @@ public class MethodMain {
     }
 
     public void moveGame(Player py, int dice) {
-        gm.showFirts();
         gm.moveGame(dice);
     }
     
