@@ -202,17 +202,17 @@ public class Nodo {
         }
     }
 
-    private void removePlayer(Player player, Player py) {
-        if (player.getNext() == py) {
-            player.setNext(player.getNext().getNext());
+    private void removePlayer(Player player, Player temp) {
+        if (player.getNext() == temp) {
+            player.setNext(temp.getNext());
             players = "";
         } else {
-            removePlayer(player.getNext(), py);
+            removePlayer(player.getNext(), temp);
         }
     }
 
-    public void addPlayerNodo(Player py) {
-        Player temp = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(), py.getParam(), py.getTurn());
+    public void addPlayerNodo(Player temp) {
+        //Player temp = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(), py.getParam(), py.getTurn());
         if (firstPlayer == null) {
             firstPlayer = temp;
         } else {
