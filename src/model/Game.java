@@ -156,11 +156,39 @@ public class Game {
         int numF = py.getPosition().getNum();
         Nodo nodoF = matrix.searchNode(numF);
         nodoF.removePlayerNodo(py.getSymbol());
-        Nodo nodoL = matrix.searchNode(nodoF.getNum() + dice);
-        py.setPosition(nodoL);
-        nodoL.addPlayerNodo(createNewPlayerinNodo(py));
+        int numL = nodoF.getNum() + dice;
+        py.setAmountPlay(py.getAmountPlay()+1);
+        if(numL >= matrix.getNumCol()*matrix.getNumRow()){
+            System.out.println("El jugador "+py.getSymbol()+" ha ganado la partida con "+py.getAmountPlay()+" turnos");
+            System.exit(0);
+        }
+        Nodo nodoL = matrix.searchNode(numL);
+        if (nodoL.getSnake() != null) {
+            if (nodoL.getNum() == nodoL.getSnake().getFirstS().getNum()) {
+                nodoL = nodoL.getSnake().getLastS();
+                py.setPosition(nodoL);
+                nodoL.addPlayerNodo(createNewPlayerinNodo(py));
+                System.out.println("Se cayo en una serpiente");
+            } else {
+                py.setPosition(nodoL);
+                nodoL.addPlayerNodo(createNewPlayerinNodo(py));
+            }
+        } else if (nodoL.getLeader() != null) {
+            if (nodoL.getNum() == nodoL.getLeader().getFirstL().getNum()) {
+                nodoL = nodoL.getLeader().getLastL();
+                py.setPosition(nodoL);
+                nodoL.addPlayerNodo(createNewPlayerinNodo(py));
+            } else {
+                py.setPosition(nodoL);
+                nodoL.addPlayerNodo(createNewPlayerinNodo(py));
+            }
+        } else {
+            py.setPosition(nodoL);
+            nodoL.addPlayerNodo(createNewPlayerinNodo(py));
+        }
+
         actualTurn++;
-        if(actualTurn == maxTurns){
+        if (actualTurn == maxTurns) {
             actualTurn = 1;
         }
 
@@ -188,8 +216,6 @@ public class Game {
                 return searchPlayerTurn(py.getNext(), tourn);
             }
         }
-        System.out.println(tourn + "F");
-        Player se = new Player('&', 1, null, false, "a", 8);
-        return se;
+        return null;
     }
 }
