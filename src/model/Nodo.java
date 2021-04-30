@@ -122,11 +122,6 @@ public class Nodo {
     }
 
     public String toStringGame() {
-        Player temp = firstPlayer;
-        while(temp != null){
-            System.out.println(temp.getSymbol()+"Sapa"+temp.getPosition().getNum());
-            temp = temp.getNext();
-        }
         stringPlayer();
         String aux = players;
         if (snake == null && leader == null) {
@@ -207,7 +202,6 @@ public class Nodo {
             if (firstPlayer.getNext() == null) {
                 firstPlayer = null;
                 players = "";
-                System.out.println("Porque yo he sido bueno");
             } else {
                 Player current = firstPlayer.getNext();
                 firstPlayer = current;

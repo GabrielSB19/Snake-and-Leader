@@ -14,10 +14,18 @@ public class MethodMain {
         params = param.split(" ");
     }
 
-    public void moveGame(Player py, int dice) {
-        gm.moveGame(dice);
+    public boolean moveGame(Player py, int dice) {
+        if (!gm.getBooleanFinishGame()) {
+            gm.moveGame(dice);
+            showMsgLadder(py.getSymbol());
+            showMsgSnake(py.getSymbol());
+            return false;
+        } else {
+            showMsgFinish(py);
+            return true;
+        }
     }
-    
+
     public Player getPlayer() {
         return gm.getSymbolPlayer();
     }
@@ -57,5 +65,27 @@ public class MethodMain {
 
     public int throwDice() {
         return gm.throwDice();
+    }
+
+    public void showMsgSnake(char x) {
+        if (gm.getBooleanSnake()) {
+            System.out.println("El jugador " + x + " ha caido en una serpiente, desciende casillas");
+        }
+    }
+
+    public void showMsgLadder(char x) {
+        if (gm.getBooleaLadder()) {
+            System.out.println("El jugador " + x + " ha caido en una escalera asciende casillas");
+        }
+    }
+
+    public void showMsgFinish(Player x) {
+        if (gm.getBooleanFinishGame()) {
+            System.out.println("El jugador " + x.getSymbol() + " ha ganado el juego, con " + x.getTurn() + " turnos");
+        }
+    }
+
+    public boolean showMenuAgain() {
+        return gm.getBooleaLadder();
     }
 }

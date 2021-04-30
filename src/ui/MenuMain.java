@@ -70,7 +70,9 @@ public class MenuMain {
             int dice = mm.throwDice();
             Player py = mm.getPlayer();
             System.out.println("El jugador " + py.getSymbol() + " lanzo y obtuvo el puntaje " + dice);
-            mm.moveGame(py, dice);
+            if(mm.moveGame(py, dice)){
+               startProgram(); 
+            }
             mm.soutMatrix();
             playTheGame();
         } else if (st.equalsIgnoreCase("num")) {
@@ -82,6 +84,7 @@ public class MenuMain {
             startProgram();
         }
     }
+
 
     public void caseNum() {
         Matrix.setCentinela(true);

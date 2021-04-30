@@ -9,7 +9,23 @@ public class Game {
     private String param;
     private int maxTurns;
     private int actualTurn = 1;
+    private boolean snake = false;
+    private boolean ladder = false;
+    private boolean finishGame = false;
     private Player firstPlayerGame;
+    private Player podium;
+
+    public boolean getBooleanSnake() {
+        return snake;
+    }
+
+    public boolean getBooleaLadder() {
+        return ladder;
+    }
+
+    public boolean getBooleanFinishGame() {
+        return finishGame;
+    }
 
     public void setMaxTurns(int n) {
         maxTurns = n;
@@ -142,7 +158,6 @@ public class Game {
     public int throwDice() {
         int maxDice = 7;
         int minDice = 1;
-        //MaxDice - 1
         int dice = (int) Math.floor(Math.random() * (maxDice - minDice) + minDice);
         return dice;
     }
@@ -150,31 +165,35 @@ public class Game {
     public Player getSymbolPlayer() {
         return searchPlayerTurn();
     }
+    
 
     public void moveGame(int dice) {
+        snake = false;
+        ladder = false;
+        finishGame = false;
         Player py = searchPlayerTurn();
         int numF = py.getPosition().getNum();
         Nodo nodoF = matrix.searchNode(numF);
         nodoF.removePlayerNodo(py.getSymbol());
         int numL = nodoF.getNum() + dice;
-        py.setAmountPlay(py.getAmountPlay()+1);
-        if(numL >= matrix.getNumCol()*matrix.getNumRow()){
-            System.out.println("El jugador "+py.getSymbol()+" ha ganado la partida con "+py.getAmountPlay()+" turnos");
-            System.exit(0);
+        py.setAmountPlay(py.getAmountPlay() + 1);
+        if (numL >= matrix.getNumCol() * matrix.getNumRow()) {
+            finishGame = true;
         }
         Nodo nodoL = matrix.searchNode(numL);
         if (nodoL.getSnake() != null) {
             if (nodoL.getNum() == nodoL.getSnake().getFirstS().getNum()) {
+                snake = true;
                 nodoL = nodoL.getSnake().getLastS();
                 py.setPosition(nodoL);
                 nodoL.addPlayerNodo(createNewPlayerinNodo(py));
-                System.out.println("Se cayo en una serpiente");
             } else {
                 py.setPosition(nodoL);
                 nodoL.addPlayerNodo(createNewPlayerinNodo(py));
             }
         } else if (nodoL.getLeader() != null) {
             if (nodoL.getNum() == nodoL.getLeader().getFirstL().getNum()) {
+                ladder = true;
                 nodoL = nodoL.getLeader().getLastL();
                 py.setPosition(nodoL);
                 nodoL.addPlayerNodo(createNewPlayerinNodo(py));
@@ -186,7 +205,6 @@ public class Game {
             py.setPosition(nodoL);
             nodoL.addPlayerNodo(createNewPlayerinNodo(py));
         }
-
         actualTurn++;
         if (actualTurn == maxTurns) {
             actualTurn = 1;
