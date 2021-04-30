@@ -165,7 +165,6 @@ public class Game {
     public Player getSymbolPlayer() {
         return searchPlayerTurn();
     }
-    
 
     public void moveGame(int dice) {
         snake = false;
@@ -176,10 +175,23 @@ public class Game {
         Nodo nodoF = matrix.searchNode(numF);
         nodoF.removePlayerNodo(py.getSymbol());
         int numL = nodoF.getNum() + dice;
-        py.setAmountPlay(py.getAmountPlay() + 1);
-        if (numL >= matrix.getNumCol() * matrix.getNumRow()) {
+        if (numL > matrix.getNumCol() * matrix.getNumRow()) {
+            py.setAmountPlay(py.getAmountPlay() + 1);
             finishGame = true;
+        } else if (numL == matrix.getNumCol() * matrix.getNumRow()) {
+            action(py, numL);
+            finishGame = true;
+        } else {
+            action(py, numL);
         }
+        actualTurn++;
+        if (actualTurn == maxTurns) {
+            actualTurn = 1;
+        }
+    }
+
+    public void action(Player py, int numL) {
+        py.setAmountPlay(py.getAmountPlay() + 1);
         Nodo nodoL = matrix.searchNode(numL);
         if (nodoL.getSnake() != null) {
             if (nodoL.getNum() == nodoL.getSnake().getFirstS().getNum()) {
@@ -205,15 +217,10 @@ public class Game {
             py.setPosition(nodoL);
             nodoL.addPlayerNodo(createNewPlayerinNodo(py));
         }
-        actualTurn++;
-        if (actualTurn == maxTurns) {
-            actualTurn = 1;
-        }
-
     }
 
     public Player createNewPlayerinNodo(Player py) {
-        Player newPlayer = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(), py.getParam(), py.getTurn());
+        Player newPlayer = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(), py.getParam(), py.getTurn(), py.getNickName(), py.getScore());
         newPlayer.setNext(null);
         return newPlayer;
     }
@@ -235,5 +242,14 @@ public class Game {
             }
         }
         return null;
+    }
+    
+    public void askPlayer(Player py, String nickName, int row, int col){
+        py.setScore(row, col);
+        py.setNickName(nickName);
+    }
+    
+    public boolean getFinishGame(){
+        return finishGame;
     }
 }

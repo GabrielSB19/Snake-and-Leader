@@ -138,7 +138,7 @@ public class Nodo {
     }
 
     public void createPlayer(Nodo pos, String param) {
-        Player newPlayer = new Player((char) asciiPlayers++, 0, pos, false, param, turn++);
+        Player newPlayer = new Player((char) asciiPlayers++, 0, pos, false, param, turn++, "", 0);
         if (firstPlayer == null) {
             firstPlayer = newPlayer;
         } else {
@@ -147,7 +147,7 @@ public class Nodo {
     }
 
     public void createPlayerSymb(Nodo pos, String param, int n) {
-        Player newPlayer = new Player(param.charAt(n), 0, pos, false, param, turn++);
+        Player newPlayer = new Player(param.charAt(n), 0, pos, false, param, turn++, "", 0);
         if (firstPlayer == null) {
             firstPlayer = newPlayer;
         } else {
