@@ -1,6 +1,38 @@
 package model;
 
-public class Game {
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Game implements Serializable {
+
+    private final String SAVE_PATH_FILE = "data/BinaryTree.cgd";
+
+    public void loadData() throws IOException, FileNotFoundException {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(SAVE_PATH_FILE)));
+            Player test = (Player) ois.readObject();
+            this.podium = test;
+            ois.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveData() throws IOException {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE));
+        oos.writeObject(this.podium);
+        oos.close();
+    }
+
+    public Game() throws IOException {
+        loadData();
+    }
 
     private int countSnakes = 0;
     private int countLeaders = 0;
@@ -177,16 +209,18 @@ public class Game {
         int numL = nodoF.getNum() + dice;
         if (numL > matrix.getNumCol() * matrix.getNumRow()) {
             py.setAmountPlay(py.getAmountPlay() + 1);
+            actualTurn = py.getTurn();
             finishGame = true;
         } else if (numL == matrix.getNumCol() * matrix.getNumRow()) {
             action(py, numL);
+            actualTurn = py.getTurn();
             finishGame = true;
         } else {
             action(py, numL);
-        }
-        actualTurn++;
-        if (actualTurn == maxTurns) {
-            actualTurn = 1;
+            actualTurn++;
+            if (actualTurn == maxTurns) {
+                actualTurn = 1;
+            }
         }
     }
 
@@ -220,7 +254,8 @@ public class Game {
     }
 
     public Player createNewPlayerinNodo(Player py) {
-        Player newPlayer = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(), py.getParam(), py.getTurn(), py.getNickName(), py.getScore());
+        Player newPlayer = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(),
+                py.getParam(), py.getTurn(), py.getNickName(), py.getScore());
         newPlayer.setNext(null);
         return newPlayer;
     }
@@ -243,13 +278,44 @@ public class Game {
         }
         return null;
     }
-    
-    public void askPlayer(Player py, String nickName, int row, int col){
+
+    public void askPlayer(Player py, String nickName, int row, int col, String param) {
         py.setScore(row, col);
         py.setNickName(nickName);
+        py.setParam(param);
+        py.setFinish(true);
     }
-    
-    public boolean getFinishGame(){
+
+    public boolean getFinishGame() {
         return finishGame;
+    }
+
+    public void addBinary(Player py) throws IOException {
+        Player newPlayer = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(), 
+        py.getParam(), py.getTurn(), py.getNickName(), py.getScore());
+        if (podium == null) {
+            podium = newPlayer;
+        } else {
+            addBinary(podium, newPlayer);
+        }
+        saveData();
+    }
+
+    private void addBinary(Player current, Player newPlayer) {
+        if (newPlayer.getScore() <= current.getScore()) {
+            if (current.getLeft() == null) {
+                current.setLeft(newPlayer);
+                newPlayer.setParent(current);
+            } else {
+                addBinary(current.getLeft(), newPlayer);
+            }
+        } else {
+            if (current.getRight() == null) {
+                current.setRight(newPlayer);
+                newPlayer.setParent(current);
+            } else {
+                addBinary(current.getRight(), newPlayer);
+            }
+        }
     }
 }

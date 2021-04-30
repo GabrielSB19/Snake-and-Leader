@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.IOException;
 import model.*;
 
 import java.util.Scanner;
@@ -7,7 +8,7 @@ import java.util.Scanner;
 public class MenuMain {
 
     private Scanner sc = new Scanner(System.in);
-    private Game gm = new Game();
+    private Game gm;
 
     String[] params = new String[5];
     private int row = 0;
@@ -18,6 +19,10 @@ public class MenuMain {
         System.out.println("--------------- Bienvenido A ---------------");
         System.out.println("---------- Escalares y Serpientes ----------");
         System.out.println("--------------------------------------------");
+    }
+
+    public MenuMain() throws IOException {
+        this.gm = new Game();
     }
 
     public void mainMenu() {
@@ -34,7 +39,7 @@ public class MenuMain {
         return choice;
     }
 
-    public void doOperation(int choice) {
+    public void doOperation(int choice) throws IOException {
         switch (choice) {
             case 1:
                 System.out.println("Por favor ingresa los parametros del juego en una cadena");
@@ -59,7 +64,7 @@ public class MenuMain {
     }
 
     @SuppressWarnings("InfiniteRecursion")
-    public void startProgram() {
+    public void startProgram() throws IOException {
         mainMenu();
         int option = readOption();
         doOperation(option);
@@ -71,12 +76,19 @@ public class MenuMain {
         params = param.split(" ");
     }
 
-    public void functionsGame() {
+    public void functionsGame() throws IOException {
         newMatrix();
-        createSnakes();
-        createLeader();
-        createPlayers();
-        soutMatrix();
+        if ((Integer.parseInt(params[2]) * 2) + (Integer.parseInt(params[3]) * 2) <= (row * col)-2) {
+            createSnakes();
+            createLeader();
+            createPlayers();
+            soutMatrix();
+        } else {
+            System.out.println("El numero de escaleras y serpientes supera las casillas disponibles");
+            System.out.println("Por favor, ingresa una menor cantidad");
+            startProgram();
+        }
+        
     }
 
     public boolean moveGame(Player py, int dice) {
@@ -112,7 +124,7 @@ public class MenuMain {
             int ammountPlayers = Integer.parseInt(params[4]);
             gm.createPlayers(ammountPlayers);
             gm.setMaxTurns(ammountPlayers + 1);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             gm.createPlayerSymb(params[4]);
             gm.setMaxTurns(params[4].length() + 1);
         }
@@ -162,7 +174,7 @@ public class MenuMain {
         }
     }
 
-    public void playTheGame() {
+    public void playTheGame() throws IOException {
         String st = sc.nextLine();
         if (st.equals("")) {
             int dice = throwDice();
@@ -170,9 +182,9 @@ public class MenuMain {
             if (moveGame(py, dice)) {
                 System.out.println("Por favor ingresa un nombre de usuario para que estes en el podium");
                 String nickname = sc.nextLine();
-                gm.askPlayer(py, nickname, row, col);
-                System.out.println(py.getNickName()+"Sapa");
-                System.out.println(py.getScore()+"Gedionda");
+                gm.askPlayer(py, nickname, row, col, getParams(params));
+                gm.addBinary(py);
+                gm = new Game();
                 startProgram();
             } else {
                 System.out.println("El jugador " + py.getSymbol() + " lanzo y obtuvo el puntaje " + dice);
@@ -183,9 +195,29 @@ public class MenuMain {
             caseNum();
             playTheGame();
         } else if (st.equalsIgnoreCase("simul")) {
-            System.out.println("Yes");
-        } else if (st.equalsIgnoreCase("Menu")) {
+            simul(true);
             startProgram();
+        } else if (st.equalsIgnoreCase("menu")) {
+            gm = new Game();
+            startProgram();
+        }
+    }
+
+    public void simul(boolean out) throws IOException {
+        if (out) {
+            int dice = throwDice();
+            Player py = getPlayer();
+            if (moveGame(py, dice)) {
+                System.out.println("Por favor ingresa un nombre de usuario para que estes en el podium");
+                String nickname = sc.nextLine();
+                gm.askPlayer(py, nickname, row, col, getParams(params));
+                gm.addBinary(py);
+                gm = new Game();
+            } else {
+                System.out.println("El jugador " + py.getSymbol() + " lanzo y obtuvo el puntaje " + dice);
+                soutMatrix();
+                simul(true);
+            }
         }
     }
 
@@ -195,5 +227,10 @@ public class MenuMain {
         Matrix.setCentinela(false);
         sc.nextLine();
         soutMatrix();
+    }
+    
+    public String getParams(String[] param){
+        String msg = params[1]+" "+params[1]+" "+params[2]+" "+params[3]+" "+params[4];
+        return msg;
     }
 }
