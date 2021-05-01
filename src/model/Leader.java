@@ -1,6 +1,10 @@
 package model;
 
-public class Leader {
+import java.io.Serializable;
+
+public class Leader implements Serializable {
+
+    private static final long serialVersionUID = 1;
 
     private Nodo firstL;
     private Nodo lastL;

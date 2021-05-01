@@ -1,6 +1,10 @@
 package model;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
+
+    private static final long serialVersionUID = 1;
 
     private char symbol;
     private int amountPlay;
@@ -22,8 +26,8 @@ public class Player {
         this.finish = false;
         this.param = param;
         this.turn = turn;
-        this.nickName = "";
-        this.score = 0;
+        this.nickName = nickName;
+        this.score = score;
     }
 
     public double getScore() {
@@ -31,9 +35,9 @@ public class Player {
     }
 
     public void setScore(int row, int col) {
-        double newScore = amountPlay*(row*col);
+        double newScore = amountPlay * (row * col);
         this.score = newScore;
-    }   
+    }
 
     public String getNickName() {
         return nickName;
@@ -42,8 +46,6 @@ public class Player {
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
-    
-    
 
     public String getParam() {
         return param;
@@ -60,7 +62,7 @@ public class Player {
     public void setTurn(int turn) {
         this.turn = turn;
     }
-    
+
     public char getSymbol() {
         return symbol;
     }

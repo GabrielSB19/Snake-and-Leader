@@ -20,7 +20,6 @@ public class Game implements Serializable {
             this.podium = test;
             ois.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -280,9 +279,11 @@ public class Game implements Serializable {
     }
 
     public void askPlayer(Player py, String nickName, int row, int col, String param) {
+        String newParam = param;
+        newParam+= " "+showSyms();
         py.setScore(row, col);
         py.setNickName(nickName);
-        py.setParam(param);
+        py.setParam(newParam);
         py.setFinish(true);
     }
 
@@ -291,8 +292,8 @@ public class Game implements Serializable {
     }
 
     public void addBinary(Player py) throws IOException {
-        Player newPlayer = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(), 
-        py.getParam(), py.getTurn(), py.getNickName(), py.getScore());
+        Player newPlayer = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(),
+                py.getParam(), py.getTurn(), py.getNickName(), py.getScore());
         if (podium == null) {
             podium = newPlayer;
         } else {
@@ -303,19 +304,57 @@ public class Game implements Serializable {
 
     private void addBinary(Player current, Player newPlayer) {
         if (newPlayer.getScore() <= current.getScore()) {
-            if (current.getLeft() == null) {
-                current.setLeft(newPlayer);
-                newPlayer.setParent(current);
-            } else {
-                addBinary(current.getLeft(), newPlayer);
-            }
-        } else {
             if (current.getRight() == null) {
                 current.setRight(newPlayer);
                 newPlayer.setParent(current);
             } else {
                 addBinary(current.getRight(), newPlayer);
             }
+        } else {
+            if (current.getLeft() == null) {
+                current.setLeft(newPlayer);
+                newPlayer.setParent(current);
+            } else {
+                addBinary(current.getLeft(), newPlayer);
+            }
         }
     }
-}
+    private String playerSim = "";
+    private String stringTree = "";
+    private int positionInTree = 1;
+
+    public String showTreeInOrder(Player py) {
+        if (py != null) {
+            showTreeInOrder(py.getLeft());
+            stringTree += "-------------------["+(positionInTree++)+"]----------------------\n"; 
+            stringTree += "NickName: " + py.getNickName() + "\nSimbolo: " + py.getSymbol()+ "\nParametros: " + py.getParam()+"\n";
+            stringTree += "Puntaje: " + py.getScore() + "\n";
+            stringTree += "--------------------------------------------\n";
+            showTreeInOrder(py.getRight());
+        }
+        return stringTree;
+    }
+
+    public Player getPodium() {
+        return podium;
+    }
+
+    public String showSyms() {
+        if (firstPlayerGame == null) {
+            playerSim = "";
+        } else if (firstPlayerGame != null) {
+            playerSim += firstPlayerGame.getSymbol();
+            if (firstPlayerGame.getNext() != null) {
+                showSyms(firstPlayerGame.getNext());
+            }
+        }
+        return playerSim;
+    }
+
+    private void showSyms(Player player) {
+        if (player != null) {
+            playerSim += player.getSymbol();
+            showSyms(player.getNext());
+        }
+    }
+} 

@@ -21,7 +21,7 @@ public class MenuMain {
         System.out.println("--------------------------------------------");
     }
 
-    public MenuMain() throws IOException {
+    public MenuMain() throws IOException, ClassNotFoundException {
         this.gm = new Game();
     }
 
@@ -39,7 +39,7 @@ public class MenuMain {
         return choice;
     }
 
-    public void doOperation(int choice) throws IOException {
+    public void doOperation(int choice) throws IOException, ClassNotFoundException {
         switch (choice) {
             case 1:
                 System.out.println("Por favor ingresa los parametros del juego en una cadena");
@@ -49,7 +49,9 @@ public class MenuMain {
                 playTheGame();
                 break;
             case 2:
-                System.out.println("Binary");
+                System.out.println("------------ Tabla de Posiciones -----------");
+                System.out.println("--------------------------------------------");
+                System.out.println(gm.showTreeInOrder(gm.getPodium()));
                 break;
             case 3:
                 System.out.println("Instruccion");
@@ -64,7 +66,7 @@ public class MenuMain {
     }
 
     @SuppressWarnings("InfiniteRecursion")
-    public void startProgram() throws IOException {
+    public void startProgram() throws IOException, ClassNotFoundException {
         mainMenu();
         int option = readOption();
         doOperation(option);
@@ -76,7 +78,7 @@ public class MenuMain {
         params = param.split(" ");
     }
 
-    public void functionsGame() throws IOException {
+    public void functionsGame() throws IOException, ClassNotFoundException {
         newMatrix();
         if ((Integer.parseInt(params[2]) * 2) + (Integer.parseInt(params[3]) * 2) <= (row * col)-2) {
             createSnakes();
@@ -174,7 +176,7 @@ public class MenuMain {
         }
     }
 
-    public void playTheGame() throws IOException {
+    public void playTheGame() throws IOException, ClassNotFoundException {
         String st = sc.nextLine();
         if (st.equals("")) {
             int dice = throwDice();
@@ -185,6 +187,7 @@ public class MenuMain {
                 gm.askPlayer(py, nickname, row, col, getParams(params));
                 gm.addBinary(py);
                 gm = new Game();
+                Matrix.setCentinela(true);
                 startProgram();
             } else {
                 System.out.println("El jugador " + py.getSymbol() + " lanzo y obtuvo el puntaje " + dice);
@@ -203,7 +206,7 @@ public class MenuMain {
         }
     }
 
-    public void simul(boolean out) throws IOException {
+    public void simul(boolean out) throws IOException, ClassNotFoundException {
         if (out) {
             int dice = throwDice();
             Player py = getPlayer();
@@ -213,6 +216,7 @@ public class MenuMain {
                 gm.askPlayer(py, nickname, row, col, getParams(params));
                 gm.addBinary(py);
                 gm = new Game();
+                Matrix.setCentinela(true);
             } else {
                 System.out.println("El jugador " + py.getSymbol() + " lanzo y obtuvo el puntaje " + dice);
                 soutMatrix();
@@ -230,7 +234,7 @@ public class MenuMain {
     }
     
     public String getParams(String[] param){
-        String msg = params[1]+" "+params[1]+" "+params[2]+" "+params[3]+" "+params[4];
+        String msg = params[1]+" "+params[1]+" "+params[2]+" "+params[3];
         return msg;
     }
 }

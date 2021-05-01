@@ -1,6 +1,10 @@
 package model;
 
-public class Nodo {
+import java.io.Serializable;
+
+public class Nodo implements Serializable {
+
+    private static final long serialVersionUID = 1;
 
     private int row;
     private int col;
@@ -26,8 +30,8 @@ public class Nodo {
         this.snake = null;
         this.firstPlayer = null;
     }
-    
-    public void setPlayerString(String s){
+
+    public void setPlayerString(String s) {
         players = s;
     }
 
@@ -134,7 +138,7 @@ public class Nodo {
             players = "";
             return "[" + leader.getIdL() + aux + "]";
         }
-        
+
     }
 
     public void createPlayer(Nodo pos, String param) {
@@ -214,8 +218,8 @@ public class Nodo {
     }
 
     private void removePlayer(Player player, char py) {
-        if(player != null){
-            if(player.getSymbol() == py){
+        if (player != null) {
+            if (player.getSymbol() == py) {
                 Player current = player.getNext();
                 player = current;
                 players = "";
