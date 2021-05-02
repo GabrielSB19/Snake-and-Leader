@@ -48,13 +48,20 @@ _Toda documentacion desde los requerimientos del Software, el diagrama de clases
 
 _Para ver las funcionalidades de la aplicación, por favor, ve las imagenes que estan acontinuacion. Si quieres un poco más de detalle puedes ver el siguiente video:_
 
-* test
+* Salto de linea: Juego normal, se tira un dado y avanza la casilla automaticamente hasta que el otro jugador de un salto de linea (Enter).
+
+* Menu: Muestra el menu de juego.
+
+* Num: Muestra las casilla enumeradas, las escaleras y serpientes sin jugadores.
+
+* Simu: El juego se realiza solo dando el resultado final.
+
 
 ## <b>_Expresiones de Gratitud_</b> 🎁
 
 * _Agradecemos a los integrantes del grupo de discord: "Matriculados Papi" por la ayuda durante el desarrollo._ 📢
+* _Agradecemos al profesor Reyes de Algoritmos Y Programacion II de la Universidad Icesi por el apoyo durante el desarrollo._ 📢
 
 ---
 ⌨️ con ❤️ por [cuatrosr](https://github.com/cuatrosr) 😊<br>
 ⌨️ con ❤️ por [GabrielSB19](https://github.com/GabrielSB19) 😊
-
