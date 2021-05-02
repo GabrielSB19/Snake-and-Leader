@@ -21,6 +21,13 @@ public class Nodo implements Serializable {
     private Leader leader;
     private Snake snake;
     private Player firstPlayer;
+    
+    /**
+     * Builder Nodo
+     * @param row Position row
+     * @param col Position col
+     * @param num enumeration selected
+     */
 
     public Nodo(int row, int col, int num) {
         this.row = row;
@@ -115,6 +122,11 @@ public class Nodo implements Serializable {
         this.num = num;
     }
 
+    /**
+     * Shoe the nodo only snake, ladder and nums
+     * @return nodo in String
+     */
+    
     public String toString() {
         if (snake == null && leader == null) {
             return "[" + num + "]";
@@ -125,6 +137,11 @@ public class Nodo implements Serializable {
         }
     }
 
+    /**
+     * Show the nodo only snake, ladder and players
+     * @return nodo with Player
+     */
+    
     public String toStringGame() {
         stringPlayer();
         String aux = players;
@@ -141,6 +158,11 @@ public class Nodo implements Serializable {
 
     }
 
+    /**
+     * Create players in the nodo
+     * @param pos Position of new player
+     * @param param params of Player
+     */
     public void createPlayer(Nodo pos, String param) {
         Player newPlayer = new Player((char) asciiPlayers++, 0, pos, false, param, turn++, "", 0);
         if (firstPlayer == null) {
@@ -149,6 +171,13 @@ public class Nodo implements Serializable {
             addPlayers(firstPlayer, newPlayer);
         }
     }
+    
+    /**
+     * Createh player in the nodo with the symbols
+     * @param pos Position of new player
+     * @param param params of player
+     * @param n symbol selected
+     */
 
     public void createPlayerSymb(Nodo pos, String param, int n) {
         Player newPlayer = new Player(param.charAt(n), 0, pos, false, param, turn++, "", 0);
@@ -159,6 +188,12 @@ public class Nodo implements Serializable {
         }
     }
 
+    /**
+     * Recursive addPlayer
+     * @param py first Player
+     * @param newPy new player
+     */
+    
     private void addPlayers(Player py, Player newPy) {
         if (py.getNext() == null) {
             py.setNext(newPy);
@@ -167,22 +202,10 @@ public class Nodo implements Serializable {
         }
     }
 
-    public void listPlayer(Player player) {
-        if (firstPlayer == null) {
-            firstPlayer = player;
-        } else {
-            addPlayerNext(firstPlayer, player);
-        }
-    }
-
-    private void addPlayerNext(Player current, Player player) {
-        if (current.getNext() == null) {
-            current.setNext(player);
-        } else {
-            addPlayerNext(current.getNext(), player);
-        }
-    }
-
+    /**
+     * Converte the symbol player in String.
+     */
+    
     public void stringPlayer() {
         if (firstPlayer == null) {
             players = "";
@@ -194,6 +217,11 @@ public class Nodo implements Serializable {
         }
     }
 
+    /**
+     * Recursive metodh of the stringPlayer.
+     * @param player first Player
+     */
+    
     private void stringPlayer(Player player) {
         if (player != null) {
             players += player.getSymbol();
@@ -201,6 +229,11 @@ public class Nodo implements Serializable {
         }
     }
 
+    /**
+     * Remove the player that was moved
+     * @param py symbol of player to remove
+     */
+    
     public void removePlayerNodo(char py) {
         if (firstPlayer.getSymbol() == py) {
             if (firstPlayer.getNext() == null) {
@@ -217,6 +250,12 @@ public class Nodo implements Serializable {
         }
     }
 
+    /**
+     * Recursive metodh removePlayer
+     * @param player firts Player
+     * @param py symbol of player to move
+     */
+    
     private void removePlayer(Player player, char py) {
         if (player != null) {
             if (player.getSymbol() == py) {
@@ -229,6 +268,11 @@ public class Nodo implements Serializable {
         }
     }
 
+    /**
+     * Add player in the box
+     * @param temp first Player
+     */
+    
     public void addPlayerNodo(Player temp) {
         if (firstPlayer == null) {
             firstPlayer = temp;

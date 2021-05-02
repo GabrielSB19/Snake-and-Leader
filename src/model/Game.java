@@ -12,6 +12,12 @@ import java.io.Serializable;
 public class Game implements Serializable {
 
     private final String SAVE_PATH_FILE = "data/BinaryTree.cgd";
+    
+    /**
+     * Load the leaderboard
+     * @throws IOException
+     * @throws FileNotFoundException 
+     */
 
     public void loadData() throws IOException, FileNotFoundException {
         try {
@@ -22,6 +28,11 @@ public class Game implements Serializable {
         } catch (Exception e) {
         }
     }
+    
+    /**
+     * Saves the players to be serialized
+     * @throws IOException 
+     */
 
     public void saveData() throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE));
@@ -29,6 +40,11 @@ public class Game implements Serializable {
         oos.close();
     }
 
+    /**
+     * Builder Game
+     * @throws IOException 
+     */
+    
     public Game() throws IOException {
         loadData();
     }
@@ -74,14 +90,32 @@ public class Game implements Serializable {
         countLeaders = n;
     }
 
+    /**
+     * Create the matrix
+     * @param row number of rows
+     * @param col number of columns
+     */
+    
     public void newMatrix(int row, int col) {
         matrix = new Matrix(row, col);
     }
 
+    /**
+     * Show the matrix
+     * @return 
+     */
+    
     public String soutMatrix() {
         return matrix.toStringMatrix();
     }
 
+    /**
+     * Create the snakes
+     * @param row number of rows
+     * @param col number or columns
+     * @param ammountSnakes amount of snakes to create
+     */
+    
     public void createSnakes(int row, int col, int ammountSnakes) {
         if (countSnakes < ammountSnakes) {
             int maxNumF = (matrix.getNumCol() * matrix.getNumRow());
@@ -100,6 +134,13 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Create the ladder 
+     * @param row number of rows
+     * @param col number of columns
+     * @param amountLeaders amount of ladders to create
+     */
+    
     public void createLeader(int row, int col, int amountLeaders) {
         if (countLeaders < amountLeaders) {
             int maxNumF = (matrix.getNumCol() * matrix.getNumRow()) - matrix.getNumCol();
@@ -118,6 +159,11 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Create the players
+     * @param n amount of players
+     */
+    
     public void createPlayers(int n) {
         if (n > 0) {
             Nodo pos = matrix.searchNode(1);
@@ -128,6 +174,11 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Create the player with symbols
+     * @param param symbols
+     */
+    
     public void createPlayerSymb(String param) {
         int lengthPlayer = param.length();
         int aux = 0;
@@ -144,6 +195,13 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * A random position for snakes and ladders is obtained.
+     * @param maxNum Max limit
+     * @param minNum Min limit
+     * @return 
+     */
+    
     public int addRandomInt(int maxNum, int minNum) {
         int randomPos = (int) Math.floor(Math.random() * (maxNum - minNum) + minNum);
         if (addRandom(randomPos)) {
@@ -153,6 +211,13 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Searches if the random number has already been selected before.
+     * @param rd LinkedList to search the random
+     * @param random rando to search
+     * @return boolean to know if the rando is never used
+     */
+    
     private boolean searchRandom(Random rd, int random) {
         if (rd.getRandom() == random) {
             return true;
@@ -163,6 +228,12 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Add the random in the linkedList and add create snake or ladder
+     * @param random random
+     * @return boolean to know if the random is add it
+     */
+    
     private boolean addRandom(int random) {
         if (first == null) {
             first = new Random(random);
@@ -178,6 +249,12 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Metodh recursive to add random
+     * @param rd random to add
+     * @return recursive
+     */
+    
     private Random getLastRandom(Random rd) {
         if (rd.getNext() == null) {
             return rd;
@@ -186,6 +263,11 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Roll the die and get the number of the die
+     * @return  number of dice
+     */
+    
     public int throwDice() {
         int maxDice = 7;
         int minDice = 1;
@@ -193,10 +275,20 @@ public class Game implements Serializable {
         return dice;
     }
 
+    /**
+     * Get the symbol player
+     * @return 
+     */
+    
     public Player getSymbolPlayer() {
         return searchPlayerTurn();
     }
 
+    /**
+     * Changes the players in the boxes.
+     * @param dice value of dice
+     */
+    
     public void moveGame(int dice) {
         snake = false;
         ladder = false;
@@ -223,6 +315,12 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Perform the action to move the die
+     * @param py Player to move
+     * @param numL new position
+     */
+    
     public void action(Player py, int numL) {
         py.setAmountPlay(py.getAmountPlay() + 1);
         Nodo nodoL = matrix.searchNode(numL);
@@ -252,12 +350,23 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Create new player to add in the box.
+     * @param py reference player
+     * @return player created
+     */
+    
     public Player createNewPlayerinNodo(Player py) {
         Player newPlayer = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(),
                 py.getParam(), py.getTurn(), py.getNickName(), py.getScore());
         newPlayer.setNext(null);
         return newPlayer;
     }
+    
+    /**
+     * Search for the player whose turn it is.
+     * @return actual player
+     */
 
     public Player searchPlayerTurn() {
         if (firstPlayerGame.getTurn() == actualTurn) {
@@ -267,6 +376,13 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Recursive to search the player
+     * @param py first Player
+     * @param tourn tourn actual
+     * @return actual tourn
+     */
+    
     private Player searchPlayerTurn(Player py, int tourn) {
         if (py.getNext() != null) {
             if (py.getNext().getTurn() == tourn) {
@@ -278,6 +394,15 @@ public class Game implements Serializable {
         return null;
     }
 
+    /**
+     * Change any atributes of the winner player
+     * @param py winner player
+     * @param nickName nickname winner player
+     * @param row number of row
+     * @param col number of columns
+     * @param param  params winner player
+     */
+    
     public void askPlayer(Player py, String nickName, int row, int col, String param) {
         String newParam = param;
         newParam+= " "+showSyms();
@@ -290,6 +415,12 @@ public class Game implements Serializable {
     public boolean getFinishGame() {
         return finishGame;
     }
+    
+    /**
+     * Add winner player in the Binary Search Tree
+     * @param py winner player
+     * @throws IOException 
+     */
 
     public void addBinary(Player py) throws IOException {
         Player newPlayer = new Player(py.getSymbol(), py.getAmountPlay(), py.getPosition(), py.isFinish(),
@@ -302,6 +433,12 @@ public class Game implements Serializable {
         saveData();
     }
 
+    /**
+     * Recurive add Binary Search Tree
+     * @param current root tree
+     * @param newPlayer player to add
+     */
+    
     private void addBinary(Player current, Player newPlayer) {
         if (newPlayer.getScore() <= current.getScore()) {
             if (current.getRight() == null) {
@@ -322,6 +459,12 @@ public class Game implements Serializable {
     private String playerSim = "";
     private String stringTree = "";
     private int positionInTree = 1;
+    
+    /**
+     * Show the Binary Search Tree
+     * @param py root
+     * @return positions
+     */
 
     public String showTreeInOrder(Player py) {
         if (py != null) {
@@ -339,6 +482,11 @@ public class Game implements Serializable {
         return podium;
     }
 
+    /**
+     * Show the syms of each player
+     * @return Symbol's players
+     */
+    
     public String showSyms() {
         if (firstPlayerGame == null) {
             playerSim = "";
@@ -351,6 +499,11 @@ public class Game implements Serializable {
         return playerSim;
     }
 
+    /**
+     * Recursive show symbols
+     * @param player Symbol's players
+     */
+    
     private void showSyms(Player player) {
         if (player != null) {
             playerSim += player.getSymbol();

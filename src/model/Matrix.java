@@ -9,6 +9,12 @@ public class Matrix {
     private int intOrderAscii = 1;
     private Nodo first;
 
+    /**
+     * Builder Matrix
+     * @param numRow number of rows
+     * @param numCol number of columns
+     */
+    
     public Matrix(int numRow, int numCol) {
         this.numRow = numRow;
         this.numCol = numCol;
@@ -40,11 +46,22 @@ public class Matrix {
         this.numCol = numCol;
     }
 
+    /**
+     * Create the matrix
+     */
+    
     private void createMatrix() {
         first = new Nodo(0, 0, 0);
         createRow(0, 0, first);
     }
 
+    /**
+     * Create the rows of the matrix. 
+     * @param i position new row
+     * @param j position new col
+     * @param firstRow first box
+     */
+    
     private void createRow(int i, int j, Nodo firstRow) {
         createCol(i, j + 1, firstRow, firstRow.getUp());
         if (i + 1 < numRow) {
@@ -55,6 +72,14 @@ public class Matrix {
         }
     }
 
+    /**
+     * Create the cols of the matrix
+     * @param i position new row
+     * @param j position new col
+     * @param prev box initial to create col
+     * @param rowPrev first Box
+     */
+    
     private void createCol(int i, int j, Nodo prev, Nodo rowPrev) {
         if (j < numCol) {
             Nodo current = new Nodo(i, j, 0);
@@ -70,12 +95,23 @@ public class Matrix {
         }
     }
 
+    /**
+     * Show the matrix
+     * @return matrix
+     */
+    
     public String toStringMatrix() {
         String msg;
         msg = toStringRow(first);
         return msg;
     }
 
+    /**
+     * Shoe the rows of the matrix
+     * @param firstRow first box
+     * @return show of rows
+     */
+    
     private String toStringRow(Nodo firstRow) {
         String msg = "";
         if (firstRow != null) {
@@ -85,7 +121,13 @@ public class Matrix {
 
         return msg;
     }
-
+    
+    /**
+     * Show the cols of the matrix
+     * @param current first box
+     * @return show the cols
+     */
+    
     private String toStringCol(Nodo current) {
         String msg = "";
         if (current != null) {
@@ -98,11 +140,21 @@ public class Matrix {
         }
         return msg;
     }
-
+    
+    /**
+     * Enumeration of the boxes.
+     * @param first first box
+     */
+    
     public void changeBox(Nodo first) {
         changeBoxFirstRow(first);
     }
-
+    
+    /**
+     * Change the num's boxes of the row
+     * @param firstRow first box.
+     */
+    
     private void changeBoxFirstRow(Nodo firstRow) {
         if (firstRow.getDown() != null) {
             changeBoxFirstRow(firstRow.getDown());
@@ -111,7 +163,12 @@ public class Matrix {
             changeBoxNextRow(firstRow);
         }
     }
-
+    
+    /**
+     * Enumeration of the next boxes
+     * @param nextRow box next
+     */
+    
     private void changeBoxNextRow(Nodo nextRow) {
         if (nextRow.getNext() != null) {
             nextRow.getNext().setNum(nextRow.getNum() + 1);
@@ -121,6 +178,11 @@ public class Matrix {
             changeBoxPrevRow(nextRow.getUp());
         }
     }
+    
+    /**
+     * Enumeration of the previous boxes
+     * @param prevRow  box prev
+     */
 
     private void changeBoxPrevRow(Nodo prevRow) {
         if (prevRow.getPrev() != null) {
@@ -132,6 +194,12 @@ public class Matrix {
         }
     }
 
+    /**
+     * Search any box
+     * @param n num of box
+     * @return box
+     */
+    
     public Nodo searchNode(int n) {
         if (first.getNum() == n) {
             return first;
@@ -140,6 +208,13 @@ public class Matrix {
         }
     }
 
+    /**
+     * Recursive Search the nodo in the right
+     * @param nd first box
+     * @param n num to search
+     * @return nodo
+     */
+    
     private Nodo searchNodeRight(Nodo nd, int n) {
         if (nd != null) {
             if (nd.getNum() == n) {
@@ -158,6 +233,13 @@ public class Matrix {
         }
     }
 
+    /**
+     * Recursive Search the nodo in the left
+     * @param nd first box
+     * @param n num to search
+     * @return nodo
+     */
+    
     private Nodo searchNodeLeft(Nodo nd, int n) {
         if (nd != null) {
             if (nd.getNum() == n) {
@@ -176,6 +258,12 @@ public class Matrix {
         }
     }
 
+    /**
+     * Gets the box where the end of the snake can be located.
+     * @param nd nodo of init the snake
+     * @return nodo final
+     */
+    
     public int getMaxNumLSnake(Nodo nd) {
         Nodo node1 = getNodeRight(nd.getDown());
         Nodo node2 = getNodeLeft(nd.getDown());
@@ -186,6 +274,12 @@ public class Matrix {
         }
     }
 
+    /**
+     * Gets the box where the end of the ladder can be located.
+     * @param nd nodo of init the ladder
+     * @return nodo final
+     */
+    
     public int getMaxNumLLeader(Nodo nd) {
         Nodo node1 = getNodeRight(nd.getUp());
         Nodo node2 = getNodeLeft(nd.getUp());
@@ -196,6 +290,12 @@ public class Matrix {
         }
     }
 
+    /**
+     * Recursive search to right
+     * @param nd box nodo first
+     * @return  limit box
+     */
+    
     private Nodo getNodeRight(Nodo nd) {
         if (nd.getNext() != null) {
             return getNodeRight(nd.getNext());
@@ -204,6 +304,12 @@ public class Matrix {
         }
     }
 
+    /**
+     * Recursive search to left
+     * @param nd box nodo first
+     * @return limit box
+     */
+    
     private Nodo getNodeLeft(Nodo nd) {
         if (nd.getPrev() != null) {
             return getNodeLeft(nd.getPrev());
@@ -212,12 +318,25 @@ public class Matrix {
         }
     }
 
+    
+    /**
+     * Create the snake in the matrix
+     * @param max end the snake
+     * @param min int the sknae
+     */
+    
     public void createSnake(Nodo max, Nodo min) {
         Snake snake = new Snake(max, min, (char) charOrderAscii++);
         max.setSnake(snake);
         min.setSnake(snake);
     }
 
+    /**
+     * Create the ladder in the matrix
+     * @param max end the ladder
+     * @param min init the ladder
+     */
+    
     public void createLeader(Nodo max, Nodo min) {
         Leader leader = new Leader(max, min, intOrderAscii++);
         max.setStair(leader);
