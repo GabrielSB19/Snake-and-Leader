@@ -27,18 +27,34 @@ _Usamos [GitHub](https://github.com/) para el versionado. Para todas las version
 
 ## <b>_Documentacion_</b> 💬📷
 
-* _Toda documentacion desde los requerimientos del Software, el diagrama de clases, hasta el javadoc se encuentran alojados en estas rutas visibles desde el repositorio o clonando el proyecto:_<br>
+_Toda documentacion desde los requerimientos del Software, el diagrama de clases, hasta el javadoc se encuentran alojados en estas rutas visibles desde el repositorio o clonando el proyecto:_<br>
 
+* _Diagrama de Clase_
 ```
 \resources\class Diagram\
 ```
 
-
+* _Requerimientos_
 ```
 \resources\docs\
 ```
 
-
+* _Javadoc_
 ```
 \resources\javadoc\
 ```
+
+## <b>_Funcionalidades_</b> 📱📹
+
+_Para ver las funcionalidades de la aplicación, por favor, ve las imagenes que estan acontinuacion. Si quieres un poco más de detalle puedes ver el siguiente video:_
+
+* test
+
+## <b>_Expresiones de Gratitud_</b> 🎁
+
+* _Agradecemos a los integrantes del grupo de discord: "Matriculados Papi" por la ayuda durante el desarrollo._ 📢
+
+---
+⌨️ con ❤️ por [cuatrosr](https://github.com/cuatrosr) 😊<br>
+⌨️ con ❤️ por [GabrielSB19](https://github.com/GabrielSB19) 😊
+
