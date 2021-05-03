@@ -1,40 +1,40 @@
-# <b>Snake-and-Leader</b>
-_Software por medio de la consola encargado de simular o recrear un juego de mesa "Escaleras y Serpientes"_
-_Este es un software totalmente libre, es decir, puede ser utilizado por cualquier persona._
+# <b>Snake-and-Ladders</b>
+_Software working on console with the target to recreate the game "Snake and Ladders" on a virtual enviroment_
+_This is a free software development, so, everyone can download and use it._
 
-## <b>_Ejecución_</b> 📦
+## <b>_Execution_</b> 📦
 
-_Tenemos una forma para que ejecutes el programa: un archivo java .jar._
+_There's only one way to start the game: java .jar._
 
-* _Para ejecutar el programa desde su .jar, deberas tener un JRE minimo de: "jre1.8.0_281" en el cual fue desarrollado. Luego, deberas seguir estos pasos: <br><br> 1️⃣ Ejecutar tu consola de comandos. <br> 2️⃣ Navegar hasta el directorio en el cual descargaste tu .ZIP o carpeta App si clonaste el directorio.<br> 3️⃣ Ejecutar el siguiente comando para ejecutarlo, cualquier error mostrado en consola hacer caso omiso:_<br>
+* _To start the program by his .jar, you need to have a minimum JRE: "jre1.8.0_281" i which it was program. After that, you have to follow this steps: <br><br> 1️⃣ Open your Command Prompt. <br> 2️⃣ Navigate to the root of your game folder.<br> 3️⃣ Write on console the command below, dont worry if there is any error printed:_<br>
 ```
-java -jar JFX-System-Casa-Dorada
+java -jar Snake-and-Leaders
 ```
-## <b>_Construido con_</b> 🛠️
+## <b>_Build with_</b> 🛠️
 
-* [Java](https://www.oracle.com/co/java/technologies/javase/javase-jdk8-downloads.html) - Lenguaje de programación en el que se trabajo.
-* [NetBeans](https://netbeans.apache.org/) - IDE en el cual se trabajo el codigo base
+* [Java](https://www.oracle.com/co/java/technologies/javase/javase-jdk8-downloads.html) - Scripting language.
+* [NetBeans](https://netbeans.apache.org/) - IDE.
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
-## <b>_Versionado_</b> 📌
+## <b>_Versioned_</b> 📌
 
-_Usamos [GitHub](https://github.com/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/GabrielSB19/JFX-System-Casa-Dorada)._
+_We use [GitHub](https://github.com/) to the versioned. For all the updates of the software, you can check on [here](https://github.com/GabrielSB19/JFX-System-Casa-Dorada)._
 
-## <b>_Autores_ ✒️
+## <b>_Autors_ ✒️
 
 * _David Montaño - [cuatrosr](https://github.com/cuatrosr)_
 * _Gabriel Suarez - [GabrielSB19](https://github.com/GabrielSB19)_
 
-## <b>_Documentacion_</b> 💬📷
+## <b>_Documentation_</b> 💬📷
 
-_Toda documentacion desde los requerimientos del Software, el diagrama de clases, hasta el javadoc se encuentran alojados en estas rutas visibles desde el repositorio o clonando el proyecto:_<br>
+_All the documentation of the requirements, class diagrams, javadoc are on the following roots bellow:_<br>
 
-* _Diagrama de Clase_
+* _Class Diagrams_
 ```
 \resources\class Diagram\
 ```
 
-* _Requerimientos_
+* _Requirements_
 ```
 \resources\docs\
 ```
@@ -44,24 +44,23 @@ _Toda documentacion desde los requerimientos del Software, el diagrama de clases
 \resources\javadoc\
 ```
 
-## <b>_Funcionalidades_</b> 📱📹
+## <b>_Functionalities_</b> 📱📹
 
 _Para ver las funcionalidades de la aplicación, por favor, ve las imagenes que estan acontinuacion. Si quieres un poco más de detalle puedes ver el siguiente video:_
 
-* Salto de linea: Juego normal, se tira un dado y avanza la casilla automaticamente hasta que el otro jugador de un salto de linea (Enter).
+* Enter: To play your turn, you need to press enter, then, the dice will roll and your player will move automatically.
 
-* Menu: Muestra el menu de juego.
+* Menu: Will show the main menu.
 
-* Num: Muestra las casilla enumeradas, las escaleras y serpientes sin jugadores.
+* Num: Will show the board with the snakes and ladders without the players.
 
-* Simu: El juego se realiza solo dando el resultado final.
+* Simu: The game will be played by the computer showing the final result.
 
+## <b>_Expressions of Gratitude_</b> 🎁
 
-## <b>_Expresiones de Gratitud_</b> 🎁
-
-* _Agradecemos a los integrantes del grupo de discord: "Matriculados Papi" por la ayuda durante el desarrollo._ 📢
-* _Agradecemos al profesor Reyes de Algoritmos Y Programacion II de la Universidad Icesi por el apoyo durante el desarrollo._ 📢
+* _We thank the members of the group of discord: "Matriculados Papi" for the help in software development._ 📢
+* _We thank the teacher "Reyes" of the course Algoritms And Programing II of the Icesi University for the help in software development._ 📢
 
 ---
-⌨️ con ❤️ por [cuatrosr](https://github.com/cuatrosr) 😊<br>
-⌨️ con ❤️ por [GabrielSB19](https://github.com/GabrielSB19) 😊
+⌨️ with ❤️ [cuatrosr](https://github.com/cuatrosr) 😊<br>
+⌨️ with ❤️ [GabrielSB19](https://github.com/GabrielSB19) 😊
